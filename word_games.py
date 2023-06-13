@@ -41,26 +41,49 @@ def polygon(inner_letter, outer_letters):
 
 def cash_square(word_list):
     ''' From take a break magazine '''
+
+    # E.g.
+    #
+    # Given words
+    # a v e r
+    # f l a p
+    # g e n t
+    # l i m e
+    # n e w t
+    #
+    # Answer
+    # f l a p
+    # l i m e
+    # a v e r
+    # g e n t
+
     rows = [w.lower() for w in word_list]
     cols = [''.join(zipped) for zipped in zip(*rows)]
 
-    for a in words_from_letters(cols[0], 4, 4):
-        for b in words_from_letters(cols[1], 4, 4):
-            for c in words_from_letters(cols[2], 4, 4):
-                for d in words_from_letters(cols[3], 4, 4):
-                    row1 = ''.join([a[0], b[0], c[0], d[0]])
-                    row2 = ''.join([a[1], b[1], c[1], d[1]])
-                    row3 = ''.join([a[2], b[2], c[2], d[2]])
-                    row4 = ''.join([a[3], b[3], c[3], d[3]])
+    # Precompute words that might be a soultion to a column
+    potentials_col_1 = words_from_letters(cols[0], 4, 4)
+    potentials_col_2 = words_from_letters(cols[1], 4, 4)
+    potentials_col_3 = words_from_letters(cols[2], 4, 4)
+    potentials_col_4 = words_from_letters(cols[3], 4, 4)
 
-                    grid_set = set([row1, row2, row3, row4])
+    for a in potentials_col_1:
+        for b in potentials_col_2:
+            for c in potentials_col_3:
+                for d in potentials_col_4:
+                    # recreate the rows
+                    row_1 = ''.join([a[0], b[0], c[0], d[0]])
+                    row_2 = ''.join([a[1], b[1], c[1], d[1]])
+                    row_3 = ''.join([a[2], b[2], c[2], d[2]])
+                    row_4 = ''.join([a[3], b[3], c[3], d[3]])
+
+                    grid_set = set([row_1, row_2, row_3, row_4])
 
                     if grid_set.issubset(word_list):
                         answer = set(word_list).difference(grid_set)
 
                         print(f'Cash Grid: ({rows})')
                         
-                        for r in [row1, row2, row3, row4]:
+                        for r in [row_1, row_2, row_3, row_4]:
                             print(f'\t{" ".join(r).upper()}')
 
                         print(f'{answer.pop()}')

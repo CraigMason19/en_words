@@ -18,6 +18,8 @@ words = words_of_length(4)
 ```Python
 words = potential_words('_?tt-e')
 ```
+See main() in en_words.py for more usage examples.
+
 # Word games
 
 #### Spelling Bee
