@@ -57,3 +57,23 @@ L I M E
 A V E R
 G E N T
 ```
+
+#### Countdown
+A solver for the TV show Countdown
+```Python
+countdown('ljsoeitwo')
+
+...
+
+6 letters:
+        ['jolies', 'joliot', 'jostle', 'lowest', 'oolite', 'otiose', 'owlets', 'soweto', 'toiles', 'towels']
+
+7 letters:
+        ['oolites', 'ostiole', 'stoolie', 'woolies']
+
+8 letters:
+        ['jowliest']
+
+9 letters:
+        []
+```
