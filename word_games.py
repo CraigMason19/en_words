@@ -1,3 +1,5 @@
+from collections import Counter
+
 from en_words import (words_from_letters, potential_words, word_count, 
     words_of_length)
 
@@ -13,14 +15,14 @@ def spelling_bee(inner_letter, outer_letters):
     sb = [word for word in sb if contains_central_letter(word)]
 
     print(f'Spelling Bee: ({inner_letter.lower()}, {outer_letters.lower()}), count: {len(sb)}')
-    print(sb)
+    print(f"\t{sb}")
     print("")
 
 def wordle(word, ignore, include):
     ''' https://www.nytimes.com/games/wordle/index.html '''
     words = potential_words(word, ignore, include)
     print(f'Wordle: {word}, count: {len(words)}')
-    print(words)
+    print(f"\t{words}")
     print()
 
 def polygon(inner_letter, outer_letters):
@@ -35,9 +37,8 @@ def polygon(inner_letter, outer_letters):
     p = [word for word in p if contains_central_letter(word)]
 
     print(f'Polygon: ({inner_letter.lower()}, {outer_letters.lower()})')
-    print(p)
+    print(f"\t{p}")
     print("")
-
 
 def cash_square(word_list):
     ''' From take a break magazine '''
@@ -87,12 +88,43 @@ def cash_square(word_list):
                             print(f'\t{" ".join(r).upper()}')
 
                         print(f'{answer.pop()}')
+    
+    print("")
+    
+def countdown(letters):
+    ''' At least 3 vowels and 4 constenats hence there are only three valid 
+        choices in modern Countdown.
+        
+        3 vowels, 6 consonants
+        4 vowels, 5 consonants
+        5 vowels, 4 consonants.
+    '''
+
+    d = { i:[] for i in range(3, 9+1) }
+
+    letters_counter = Counter(letters.lower())
+    words = words_from_letters(letters, 3, 9, False)
+
+    for word in words:
+        if Counter(word) <= letters_counter:
+            d[len(word)].append(word)
+
+    print(f"Countdown: {letters}")
+    for k, v in d.items():
+        print(f"{k} letters:")
+        print(f"\t{v}")
+        print("")
+
+    print("")
+    
+
 
 def main():
-    spelling_bee('i', 'xlpevt')
-    wordle('???N?', 'steaiy', 'r') # -> wrong was the answer
-    polygon('F', 'lretgure')
-    cash_square(['aver', 'flap', 'gent', 'lime', 'newt'])
+    # spelling_bee('o', 'taenhp')
+    # wordle('?A?SY', 'ternombulph', 'sy') # -> wrong was the answer
+    # polygon('F', 'lretgure')
+    # cash_square(['aver', 'flap', 'gent', 'lime', 'newt']) 
+    countdown('ljsoeitwo')
 
 if __name__ == '__main__':
     main()
