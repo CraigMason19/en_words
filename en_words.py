@@ -314,6 +314,8 @@ def words_from_letters(letters, min_len=3, max_len=6, remove_doubles=False, file
             The maximum word length.
         remove_doubles:
             A bool to allow for / against double letters.
+        filename_sorted:
+            The name of the file containing the sorted dictionary.
 
     Returns:
         A list.
@@ -339,6 +341,39 @@ def words_from_letters(letters, min_len=3, max_len=6, remove_doubles=False, file
             words.append(word.lower())
 
     return(words)
+
+def anagrams(word, filename_sorted=_FILENAME_SORTED):
+    """ Finds a list of words that are anagrams of a word.
+
+    Args:
+        word:
+            A string of letters to find anagrams for.
+        filename_sorted:
+            The name of the file containing the sorted dictionary.
+
+    Returns:
+        A list.
+    """ 
+    return [_ for _ in anagrams_gen(word, filename_sorted)]
+
+
+def anagrams_gen(word, filename_sorted=_FILENAME_SORTED):
+    """ Finds a list of words that are anagrams of a word and returns a generator.
+
+    Args:
+        word:
+            A string of letters to find anagrams for.
+        filename_sorted:
+            The name of the file containing the sorted dictionary.
+
+    Returns:
+        A generator.
+    """ 
+    word = word.lower()
+
+    for _ in words_of_length_gen(len(word), filename_sorted):
+        if ''.join(sorted(_)) == ''.join(sorted(word)) and _ != word:
+            yield _
 
 # endregion
 
@@ -379,6 +414,11 @@ def main():
     print(f"\nWords from letters '{letters}' between 5 & NONE letters: {len(words)}") 
     print(f"\t{words[:20]}...")
     # print(f"\t{words}")  
+
+    word = "Skate"
+    a = anagrams(word)
+    print(f"\nAnagrams of '{word}'") 
+    print(f"\t{a}")
 
 if __name__ == '__main__':
     main()
