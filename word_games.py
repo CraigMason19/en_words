@@ -1,6 +1,6 @@
 from collections import Counter
 
-from en_words.en_words import words_from_letters, potential_words, word_count, words_of_length
+from en_words.en_words import words_from_letters, potential_words
 
 def spelling_bee(inner_letter, outer_letters):
     ''' https://spellingbeegame.org '''
