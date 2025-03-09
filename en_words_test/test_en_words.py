@@ -10,7 +10,7 @@
 
 import unittest
 
-import en_words
+from en_words import en_words
 
 class TestWords(unittest.TestCase):
     #---------------------------------------------------------------------------

@@ -1,7 +1,6 @@
 from collections import Counter
 
-from en_words import (words_from_letters, potential_words, word_count, 
-    words_of_length)
+from en_words.en_words import words_from_letters, potential_words, word_count, words_of_length
 
 def spelling_bee(inner_letter, outer_letters):
     ''' https://spellingbeegame.org '''
@@ -115,16 +114,14 @@ def countdown(letters):
         print(f"\t{v}")
         print("")
 
-    print("")
-    
-
+    print("")  
 
 def main():
-    # spelling_bee('o', 'taenhp')
-    # wordle('?A?SY', 'ternombulph', 'sy') # -> wrong was the answer
-    # polygon('F', 'lretgure')
-    # cash_square(['aver', 'flap', 'gent', 'lime', 'newt']) 
-    countdown('ljsoeitwo')
+    spelling_bee('t', 'wnidal')
+    wordle("?reEd", "STNF", "") # -> 'GREED' was the answer
+    polygon('F', 'lretgure')
+    cash_square(['aver', 'flap', 'gent', 'lime', 'newt']) 
+    countdown('ljsoeitwo') # 'jowliest', 8 letters, best answer
 
 if __name__ == '__main__':
     main()
