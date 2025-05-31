@@ -1,6 +1,6 @@
 
 # en_words
-A collection of methods for working with English dictionaries and finding words and anagrams.
+A package for working with English dictionaries and finding words and anagrams.
 
 Also contains soultions and potential solutions to various word games including Wordle and Countdown.
 
