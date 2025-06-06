@@ -10,13 +10,17 @@ None.
 ## Usage
 By default the methods use the dictionary included in the directory but other text files can be passed in. Makes use of a dictionary sorted by length and then alphabetically. This can be created using the create_sorted_dict() method on a normal dictionary.
 
+```python
+import en_words as ew
+```
+
 ### Words of a certain length
 ```Python
-words = words_of_length(4)
+words = ew.words_of_length(4)
 ```
 ###  Potential words
 ```Python
-words = potential_words('_?tt-e')
+words = ew.potential_words('_?tt-e')
 ```
 See main.py for more usage examples.
 
@@ -28,6 +32,8 @@ A collection of wrappers for fun word games.
 https://www.nytimes.com/puzzles/spelling-bee
 With a central letter and 6 other letters around it. Find words (of 4 or more) that contain the central letter.
 ```Python
+from en_words.word_games import spelling_bee
+
 spelling_bee('f', 'eltbad')
 
 [..., 'peelite', 'pipette', 'pittite', 'textile', 'tillite', 'tippett', 'vitelli', 'villette', 'expletive']
@@ -36,6 +42,8 @@ spelling_bee('f', 'eltbad')
 ## Wordle
 https://www.nytimes.com/games/wordle/index.html
 ```Python
+from en_words.word_games import wordle
+
 wordle('???N?', 'steaiy', 'r')
 
 ['bronx', 'bruno', 'corno', 'cornu', 'cronk', 'drunk', 'frond', 'porno', 'prong', 'pronk', 'round', 'wrong', 'wrung']
@@ -44,6 +52,8 @@ wordle('???N?', 'steaiy', 'r')
 ## Polygon
 With a central letter and 8 other letters around it. Find words (of 4 or more) that contain the central letter.
 ```Python
+from en_words.word_games import polygon
+
 polygon('F', 'lretgure')
 
 [..., 'gruffer', 'referee', 'refugee', 'refuter', 'ruffler', 'truffle', 'ferreter', 'gefullte', 'fleurette', 'regretful']
@@ -52,6 +62,8 @@ polygon('F', 'lretgure')
 ## Cash Grid
 By putting 4 words on top of each other 4 more words can be formed reading downwards aswell.
 ```Python
+from en_words.word_games import cash_square
+
 cash_square(['aver', 'flap', 'gent', 'lime', 'newt'])
 
 F L A P
@@ -63,6 +75,8 @@ G E N T
 ## Countdown
 A solver for the TV show Countdown
 ```Python
+from en_words.word_games import countdown
+
 countdown('ljsoeitwo')
 
 ...
