@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="en_words",
-    version="1.1.1",
+    version="1.1.2",
     packages=find_packages(),
     author="Craig Mason",
     description="A package for working with English dictionaries and finding words and anagrams.",
@@ -11,6 +11,6 @@ setup(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ],
-    package_data={"en_words.en_words": ["en_words.txt", "en_words_sorted.txt"]},
+    package_data={"en_words": ["en_words.txt", "en_words_sorted.txt"]},
     include_package_data=True,
 )
