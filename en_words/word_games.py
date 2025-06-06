@@ -115,13 +115,3 @@ def countdown(letters):
         print("")
 
     print("")  
-
-def main():
-    spelling_bee('t', 'wnidal')
-    wordle("?reEd", "STNF", "") # -> 'GREED' was the answer
-    polygon('F', 'lretgure')
-    cash_square(['aver', 'flap', 'gent', 'lime', 'newt']) 
-    countdown('ljsoeitwo') # 'jowliest', 8 letters, best answer
-
-if __name__ == '__main__':
-    main()
