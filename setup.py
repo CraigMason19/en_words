@@ -11,4 +11,6 @@ setup(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ],
+    package_data={"en_words": ["en_words.txt", "en_words_sorted.txt"]},
+    include_package_data=True,
 )
