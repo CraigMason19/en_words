@@ -1,4 +1,5 @@
 from en_words import en_words as w
+from en_words import word_games as wg
 
 def main():
     """
@@ -39,5 +40,13 @@ def main():
     print(f"\nAnagrams of '{word}'") 
     print(f"\t{a}")
 
+def word_games():
+    wg.spelling_bee('t', 'wnidal')
+    wg.wordle("?reEd", "STNF", "") # -> 'GREED' was the answer
+    wg.polygon('F', 'lretgure')
+    wg.cash_square(['aver', 'flap', 'gent', 'lime', 'newt']) 
+    wg.countdown('ljsoeitwo') # 'jowliest', 8 letters, best answer
+
 if __name__ == '__main__':
     main()
+    word_games()
