@@ -15,6 +15,22 @@ from en_words.en_words import (
     anagrams, 
     anagrams_gen)
 
+from en_words.letters import (
+	letter_to_index,
+	index_to_letter,
+	next_letter,
+	previous_letter,
+	shift_letter_up,
+	shift_letter_down,
+	shift,
+	alphabet_generator,
+	shift_alphabet,
+	caesar_cipher,
+	random_lower_letter,
+	random_upper_letter,
+	random_letter
+)
+
 # from en_words.word_games import (
 #     spelling_bee, 
 #     wordle, 
