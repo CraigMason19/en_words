@@ -1,3 +1,4 @@
 from ciphers.T9 import (
-    T9Cipher
+    T9Cipher,
+    ReversibleT9Cipher,
 )
