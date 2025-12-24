@@ -1,4 +1,4 @@
-import string
+from ciphers.utils import clean_input
 
 ENCODING_DELIMITER: str = "-"
 
@@ -64,10 +64,6 @@ def letter_from_presses(number: int, count: int) -> str:
     raise ValueError(f"Digit {number} is not valid in T9 lookup")
 
 
-def _cleanInput(text: str) -> str:
-    return ''.join([ch for ch in text.lower() if ch in string.ascii_lowercase])
-
-
 class T9Cipher:
     """    
     A one-way lossy T9-style cipher that maps letters to numbers based on a 
@@ -93,7 +89,7 @@ class T9Cipher:
         Returns:
             str: Encoded numeric string, with non-alphabetic characters removed
         """
-        return ''.join(digit_map.get(ch.lower(), '') for ch in _cleanInput(text))
+        return ''.join(digit_map.get(ch.lower(), '') for ch in clean_input(text))
 
 
 class ReversibleT9Cipher:
@@ -133,7 +129,7 @@ class ReversibleT9Cipher:
         """
         letters = []
 
-        for ch in _cleanInput(text):
+        for ch in clean_input(text):
             if(ch in digit_map):
                 letters.append(digit_map[ch] * presses_map[ch])
                 continue
