@@ -1,4 +1,4 @@
-from ciphers.utils import clean_input
+from ciphers.utils import CleanInput
 
 ENCODING_DELIMITER: str = "-"
 
@@ -89,7 +89,7 @@ class T9Cipher:
         Returns:
             str: Encoded numeric string, with non-alphabetic characters removed
         """
-        return ''.join(digit_map.get(ch.lower(), '') for ch in clean_input(text))
+        return ''.join(digit_map.get(ch.lower(), '') for ch in CleanInput.alphabetical(text))
 
 
 class ReversibleT9Cipher:
@@ -129,7 +129,7 @@ class ReversibleT9Cipher:
         """
         letters = []
 
-        for ch in clean_input(text):
+        for ch in CleanInput.alphabetical(text):
             if(ch in digit_map):
                 letters.append(digit_map[ch] * presses_map[ch])
                 continue
