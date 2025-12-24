@@ -42,11 +42,11 @@ def main():
 
 def word_games():
     wg.spelling_bee('t', 'wnidal')
-    wg.wordle("?reEd", "STNF", "") # -> 'GREED' was the answer
+    wg.wordle("?a?e?", "STMLkdBY", "n") 
     wg.polygon('F', 'lretgure')
     wg.cash_square(['aver', 'flap', 'gent', 'lime', 'newt']) 
     wg.countdown('ljsoeitwo') # 'jowliest', 8 letters, best answer
 
 if __name__ == '__main__':
-    main()
+    # main()
     word_games()
