@@ -16,8 +16,19 @@ import random
 ALPHABET_LOWER = string.ascii_lowercase
 ALPHABET_UPPER = string.ascii_uppercase
 
-
 def is_letter(letter: str) -> bool:
+    """
+    Simple helper function to make sure a string is a single letter (upper 
+    or lower).
+    
+    Args:
+		letter (str):
+			The string to check.
+            
+    Returns:
+		bool:
+			True if the string is a single letter. False otherwise.
+    """
     if not letter.isalpha() or len(letter) != 1:
         return False
 
@@ -279,13 +290,11 @@ def random_upper_letter():
 def random_letter():
     """Returns a random lowercase or uppercase letter
 
-    Args:
-      None
-
     Returns:
       A single lowercase or uppercase letter.
     """    
     return random.choice(ALPHABET_LOWER + ALPHABET_UPPER) 
+
 
 class LetterFrequency:
     frequency_dict: dict[str, float] = {
@@ -319,6 +328,22 @@ class LetterFrequency:
     
     @classmethod
     def percentage(cls, letter: str) -> float:
+        """
+		Returns the frequency percentage for a specific letter. 
+
+		Args:
+			letter (str):
+				The letter whoose frequency you want to check.
+        
+        Rasies:
+			ValueError:
+				If the letter parameter isn't a single lower or uppercase 
+                letter.
+				
+		Returns:
+			float:
+				The perctange as a float describing how common the letter is.
+		"""               
         if not is_letter(letter):
             raise ValueError(f'Letter parameter "{letter:}" is not a letter.')
         
