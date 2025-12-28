@@ -1,21 +1,14 @@
 """
-English Letter Frequency
+letters.py
+----------
 
-Taken from Cornell University, a study of 40,000 words.
+Provides useful helper functions for working with letters and alphabets.
+
+English Letter Frequency:
+	Taken from Cornell University, a study of 40,000 words.
  
-https://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
+	https://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
 """
-
-#-------------------------------------------------------------------------------
-# Name:        letters.py
-#
-# Notes:       Provides useful helper functions for working with letters and
-#              alphabets.
-#
-# Links:
-#
-# TODO:    
-#-------------------------------------------------------------------------------
 
 import string
 import random
