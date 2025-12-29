@@ -7,6 +7,10 @@ from ciphers.morse_code import (
     MorseCode,
 )
 
+from ciphers.polybius_checkerboard import (
+    PolybiusCheckerboard,
+)
+
 from ciphers.utils import (
     CleanInput,
 )
