@@ -36,14 +36,14 @@ class PolybiusCheckerboard:
                     return (str(i) + str(j))
 
     @classmethod
-    def encrypt(cls, message: str) -> str:
+    def encode(cls, message: str) -> str:
         message = message.replace(' ', '').upper()
         message = message.replace('J', 'I') # interchangeable
 
         return ' '.join([cls.grid_position(c) for c in message])
 
     @classmethod
-    def decrypt(cls, message: str) -> str:
+    def decode(cls, message: str) -> str:
         tmp = message.split(' ')
         decrypted = []
 
@@ -66,7 +66,7 @@ def main():
         " 11 53 24 32 11 33 14 15 42 12 42 34 45 22 23 44 44"
         " 23 15 21 24 42 43 44 43 45 33 14 24 11 31 44 34"
         " 22 42 15 15 13 15")
-    decrypted = pc.decrypt(encrypted)
+    decrypted = pc.decode(encrypted)
 
     print("Polybius Checkerboard")
     pc.pretty_print()
@@ -78,7 +78,7 @@ def main():
     print(decrypted)
 
     decrypted = "The ancient world was fascinating"
-    encrypted = pc.encrypt(decrypted)
+    encrypted = pc.encode(decrypted)
 
     print("Decrypted message:")
     print(decrypted)
@@ -87,7 +87,7 @@ def main():
     print(encrypted)
 
     print("Decrypted message:")
-    print(pc.decrypt(encrypted))
+    print(pc.decode(encrypted))
 
 
 if __name__ == "__main__":
