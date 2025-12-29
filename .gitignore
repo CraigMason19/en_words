@@ -7,3 +7,4 @@ en_words_test/
 playground_ciphers.py
 ciphers_test/
 playground_wordle.py
+.coverage
