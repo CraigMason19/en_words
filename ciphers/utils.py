@@ -1,5 +1,23 @@
-
 import string
+from textwrap import wrap
+
+
+def chunk_text(text: str, chunk_size: int = 5) -> str:
+    """
+    Splits a string into fixed-length chunks separated by spaces.
+
+    Args:
+        text (str):
+            The input string to be chunked.
+        chunk_size (int):
+            The number of characters per chunk.
+
+    Returns:
+        str:
+            The chunked string with chunks separated by spaces.
+    """
+    return ' '.join(wrap(text, chunk_size))
+
 
 class CleanInput:
     @classmethod
