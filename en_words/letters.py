@@ -26,8 +26,8 @@ def is_letter(letter: str) -> bool:
 			The string to check.
             
     Returns:
-		bool:
-			True if the string is a single letter. False otherwise.
+        bool:
+            True if the string is a single letter. False otherwise.
     """
     if not letter.isalpha() or len(letter) != 1:
         return False
