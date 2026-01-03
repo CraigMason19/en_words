@@ -12,7 +12,7 @@ Timing Conventions (for reference):
     - 1 dash should be the duration of 3 dots
 """
 
-from ciphers.utils import CleanInput
+from .utils import CleanInput
 
 ENCODING_DELIMITER: str = "|"
 
