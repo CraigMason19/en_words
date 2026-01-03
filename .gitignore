@@ -8,3 +8,4 @@ playground_ciphers.py
 ciphers_test/
 playground_wordle.py
 .coverage
+_notes/
