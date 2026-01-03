@@ -1,4 +1,4 @@
-from ciphers.utils import CleanInput
+from .utils import CleanInput
 
 ENCODING_DELIMITER: str = "-"
 
