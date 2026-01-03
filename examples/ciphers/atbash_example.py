@@ -1,3 +1,16 @@
+"""
+Atbash Cipher Example
+
+Original message:
+        Hello World!
+
+Encoded message:
+        Svool Dliow!
+
+Decoded message:
+        Hello World!
+"""
+
 from ciphers.atbash import Atbash
 
 
