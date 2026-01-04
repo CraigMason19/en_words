@@ -12,6 +12,7 @@ Timing Conventions (for reference):
     - 1 dash should be the duration of 3 dots
 """
 
+from .cipher import Cipher
 from .utils import CleanInput
 
 ENCODING_DELIMITER: str = "|"
@@ -58,7 +59,7 @@ morse_lookup = {
     '9': "----.",
 }
 
-class MorseCode:
+class MorseCode(Cipher):
     @classmethod
     def encode_as_str(cls, text: str) -> str:
         """   
