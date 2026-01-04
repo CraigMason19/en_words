@@ -9,3 +9,4 @@ ciphers_test/
 playground_wordle.py
 .coverage
 _notes/
+_dev/
