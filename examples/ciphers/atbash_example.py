@@ -1,6 +1,5 @@
 """
-Atbash Cipher Example
----------------------
+Atbash Cipher Example:
 
 Original message:
         Hello World!
@@ -16,11 +15,12 @@ from ciphers.atbash import Atbash
 
 
 def atbash_example():
-    print("Atbash Cipher Example")
-
     original = "Hello World!"
     encoded = Atbash.encode(original)
     decoded = Atbash.decode(encoded)
+
+    # Output
+    print("Atbash Cipher Example:")
 
     print("\nOriginal message:")
     print(f"\t{original}")
