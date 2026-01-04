@@ -14,7 +14,7 @@ For example:
     'A' -> 'Z'
     'Z' -> 'A' 
     'b' -> 'y'
-    'y' -> 'b'
+    'y' -> 'b' 
 
 https://exercism.org/tracks/javascript/exercises/atbash-cipher
 """
