@@ -61,7 +61,7 @@ MORSE_LOOKUP = {
 
 class MorseCode(Cipher):
     @classmethod
-    def encode_as_str(cls, text: str) -> str:
+    def encode(cls, text: str) -> str:
         """   
         Encodes a string into Morse code as a single space-separated string.
 
@@ -70,7 +70,7 @@ class MorseCode(Cipher):
         characters are removed before encoding.
 
         Example:
-            >>> MorseCode.encode_as_str("Hello, World!")
+            >>> MorseCode.encode("Hello, World!")
             .... . .-.. .-.. --- | .-- --- .-. .-.. -..
         
         Args:
@@ -83,7 +83,7 @@ class MorseCode(Cipher):
         """
         return ' '.join([MORSE_LOOKUP[ch] for ch in CleanInput.alphanumeric_with_space(text)])
     
-    encode = encode_as_str # Alias 
+    encode_as_str = encode # Alias 
 
     @classmethod
     def encode_as_list(cls, text: str) -> list[str]:
