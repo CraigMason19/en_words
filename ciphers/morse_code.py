@@ -17,7 +17,7 @@ from .utils import CleanInput
 
 ENCODING_DELIMITER: str = "|"
 
-morse_lookup = {
+MORSE_LOOKUP = {
     ' ': ENCODING_DELIMITER,
 
     'a': ".-",
@@ -81,7 +81,7 @@ class MorseCode(Cipher):
             str:
                 A space-separated Morse code string.
         """
-        return ' '.join([morse_lookup[ch] for ch in CleanInput.alphanumeric_with_space(text)])
+        return ' '.join([MORSE_LOOKUP[ch] for ch in CleanInput.alphanumeric_with_space(text)])
     
     encode = encode_as_str # Alias 
 
@@ -106,4 +106,4 @@ class MorseCode(Cipher):
             list[str]:
                 A list of Morse code symbols.
         """
-        return [morse_lookup[ch] for ch in CleanInput.alphanumeric_with_space(text)]
+        return [MORSE_LOOKUP[ch] for ch in CleanInput.alphanumeric_with_space(text)]
