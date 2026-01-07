@@ -12,6 +12,8 @@ Timing Conventions (for reference):
     - 1 dash should be the duration of 3 dots
 """
 
+import re
+
 from .cipher import Cipher
 from .utils import CleanInput
 
@@ -60,6 +62,29 @@ MORSE_LOOKUP = {
 }
 
 class MorseCode(Cipher):
+    @classmethod
+    def is_valid_charset(cls, text: str) -> bool:
+        """
+        Return True if the string contains only characters from the Morse code
+        character set: dot (.), dash (-), and space.
+
+        Example:
+            >>> MorseCode.is_valid_charset(".... . .-.. .-.. ---")
+            True
+            >>> MorseCode.is_valid_charset(".-.. -.. / --- !!")
+            False
+                    
+        Args:
+            text (str):
+                The input text to test.
+
+        Returns:
+            bool:
+                True if the string contains valid characters, False otherwise.
+        """
+        pattern = re.compile(r'^[ .-]+$', re.ASCII)
+        return bool(pattern.match(text))
+
     @classmethod
     def encode(cls, text: str) -> str:
         """   
