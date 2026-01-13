@@ -1,6 +1,8 @@
 import string
 from textwrap import wrap
 
+ENCODING_DELIMITER: str = '/'
+UNKNOWN_TOKEN = '_'
 
 def chunk_text(text: str, chunk_size: int = 5) -> str:
     """

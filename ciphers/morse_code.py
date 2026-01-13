@@ -24,9 +24,7 @@ Timing Conventions (for reference):
 import re
 
 from .cipher import Cipher
-from .utils import CleanInput
-
-ENCODING_DELIMITER: str = '/'
+from .utils import CleanInput, ENCODING_DELIMITER, UNKNOWN_TOKEN
 
 MORSE_LOOKUP = {
     ' ': ENCODING_DELIMITER,
@@ -181,6 +179,6 @@ class MorseCode(Cipher):
         decoded = []
 
         for token in text.split():
-            decoded.append(REVERSE_MORSE_LOOKUP.get(token, "_"))
+            decoded.append(REVERSE_MORSE_LOOKUP.get(token, UNKNOWN_TOKEN))
 
         return "".join(decoded)
