@@ -1,10 +1,19 @@
 """
-Morse code encoding utilities
------------------------------
+Morse code
+----------
 
-This module provides a lookup table for converting letters and digits into
-Morse code, along with helper methods for producing either a space-separated
-string or a list of Morse symbols.
+This module provides a lookup table and a `MorseCode` class for converting letters
+and digits into Morse code.
+
+Encoding follows the rules
+    - Letters and digits are converted to dots and dashes.
+    - Spaces are replaced with the '/' delimiter to make word boundaries visible.
+    - Other characters are stripped out.
+
+Decoding follows the rules
+    - Dots and dashes are decoded to lowercase letters & numbers.
+    - Unknown dot and dash tokens are replaced with a '_'
+    - '/' delimiter is converted into a space.
 
 Timing Conventions (for reference):
     - 1 dot worth of silence between each dash and dot within a character
@@ -17,7 +26,7 @@ import re
 from .cipher import Cipher
 from .utils import CleanInput
 
-ENCODING_DELIMITER: str = "|"
+ENCODING_DELIMITER: str = '/'
 
 MORSE_LOOKUP = {
     ' ': ENCODING_DELIMITER,
@@ -61,19 +70,23 @@ MORSE_LOOKUP = {
     '9': "----.",
 }
 
+REVERSE_MORSE_LOOKUP = {v: k for k, v in MORSE_LOOKUP.items()}
+
 class MorseCode(Cipher):
     @classmethod
     def is_valid_charset(cls, text: str) -> bool:
         """
-        Return True if the string contains only characters from the Morse code
-        character set: dot (.), dash (-), and space.
+        Returns True if the string contains only characters from the following
+        charset: 
+        
+        dot (.), dash (-), space ( ) or the word space delimiter(/).
 
         Example:
             >>> MorseCode.is_valid_charset(".... . .-.. .-.. ---")
             True
-            >>> MorseCode.is_valid_charset(".-.. -.. / --- !!")
+            >>> MorseCode.is_valid_charset(".-.. -.. , --- !!")
             False
-                    
+
         Args:
             text (str):
                 The input text to test.
@@ -82,7 +95,7 @@ class MorseCode(Cipher):
             bool:
                 True if the string contains valid characters, False otherwise.
         """
-        pattern = re.compile(r'^[ .-]+$', re.ASCII)
+        pattern = re.compile(r'^[/ .-]+$', re.ASCII)
         return bool(pattern.match(text))
 
     @classmethod
@@ -90,13 +103,14 @@ class MorseCode(Cipher):
         """   
         Encodes a string into Morse code as a single space-separated string.
 
-        Letters and digits are converted to dots and dashes. Spaces are replaced
-        with the '|' delimiter to make word boundaries visible. All other
-        characters are removed before encoding.
+        Encoding follows the rules
+        - Letters and digits are converted to dots and dashes.
+        - Unknown dot and dash tokens are replaced with a '_'
+        - Spaces are replaced with the '/' delimiter to make word boundaries visible.
 
         Example:
             >>> MorseCode.encode("Hello, World!")
-            .... . .-.. .-.. --- | .-- --- .-. .-.. -..
+            .... . .-.. .-.. --- / .-- --- .-. .-.. -..
         
         Args:
             text (str):
@@ -115,13 +129,13 @@ class MorseCode(Cipher):
         """
         Encodes a string into Morse code as a list of symbols.
 
-        Letters and digits are converted to dots and dashes. Spaces are replaced
-        with the '|' delimiter to make word boundaries visible. All other
-        characters are removed before encoding.
+        Encoding follows the rules
+        - Letters and digits are converted to dots and dashes.
+        - Spaces are replaced with the '/' delimiter to make word boundaries visible.
 
         Example:
             >>> MorseCode.encode_as_list("Hello, World!")
-            ['....', '.', '.-..', '.-..', '---', '|', '.--', '---', '.-.', '.-..', '-..']
+            ['....', '.', '.-..', '.-..', '---', '/', '.--', '---', '.-.', '.-..', '-..']
         
         Args:
             text (str):
@@ -132,3 +146,41 @@ class MorseCode(Cipher):
                 A list of Morse code symbols.
         """
         return [MORSE_LOOKUP[ch] for ch in CleanInput.alphanumeric_with_space(text)]
+    
+    @classmethod
+    def decode(cls, text: str) -> str:
+        """
+        Decodes a string of dots and dashes to english text.
+            
+        Decoding follows the rules
+        - Dots and dashes are decoded to lowercase letters & numbers.
+        - Unknown dot and dash tokens are replaced with a '_'
+        - '/' delimiter is converted into a space.
+
+        Examples:
+            >>> MorseCode.decode(".... . .-.. .-.. --- / .-- --- .-. .-.. -..")
+            hello world
+            >>> MorseCode.decode(".... . .-.. .-.. --- .-- --- .-. .-.. -..")
+            helloworld
+
+        Args:
+            text (str):
+                The input text to decode.
+
+        Raises:
+            ValueError:
+                If any character in the string is not in the Morse charset. '.- /'
+
+        Returns:
+            str:
+                A decoded morse string.
+        """       
+        if not cls.is_valid_charset(text):
+            raise ValueError("Input contains characters outside the Morse charset. '.- /'")
+
+        decoded = []
+
+        for token in text.split():
+            decoded.append(REVERSE_MORSE_LOOKUP.get(token, "_"))
+
+        return "".join(decoded)
