@@ -23,7 +23,7 @@ def chunk_text(text: str, chunk_size: int = 5) -> str:
 
 class CleanInput:
     @classmethod
-    def alphabetical(cls, text: str) -> str:
+    def alphabetical(cls, text: str, with_spaces: bool = False) -> str:
         """
         Converts a string to lowercase and removes all characters that are not 
         letters.
@@ -32,18 +32,28 @@ class CleanInput:
             >>> CleanInput.alphabetical("My, Number is 19!")
             'mynumberis'
 
+            >>> CleanInput.alphabetical("My, Number is 19!", with_spaces=True)
+            'my number is'
+
         Args:
             text (str):
                 The input string to clean.
+            with_spaces (bool):
+                A flag to determine whether to include spaces or not.
 
         Returns:
             str:
-                A lowercase string containing only a-z characters.
+                A lowercase string containing a-z characters and potentially spaces.
         """
-        return ''.join([ch for ch in text.lower() if ch in string.ascii_lowercase])
+        charset = string.ascii_lowercase
+        
+        if with_spaces:
+            charset += " "
+
+        return ''.join([ch for ch in text.lower() if ch in charset])
 
     @classmethod
-    def alphanumeric(cls, text: str) -> str:
+    def alphanumeric(cls, text: str, with_spaces: bool = False) -> str:
         """
         Converts a string to lowercase and removes all characters that are not 
         letters or digits.
@@ -52,32 +62,22 @@ class CleanInput:
             >>> CleanInput.alphanumeric("My, Number is 19!")
             'mynumberis19'
 
-        Args:
-            text (str):
-                The input string to clean.
-
-        Returns:
-            str:
-                A lowercase string containing only a-z and 0-9 characters.
-        """
-        return ''.join([ch for ch in text.lower() if ch in string.ascii_lowercase + "0123456789"])
-
-    @classmethod
-    def alphanumeric_with_space(cls, text: str) -> str:
-        """
-        Converts a string to lowercase and removes all characters that are not 
-        letters, digits, or spaces.
-
-        Example:
-            >>> CleanInput.alphanumeric_with_space("My, Number is 19!")
+            >>> CleanInput.alphanumeric("My, Number is 19!", with_spaces=True)
             'my number is 19'
 
         Args:
             text (str):
                 The input string to clean.
+            with_spaces (bool):
+                A flag to determine whether to include spaces or not.
 
         Returns:
             str:
-                A lowercase string containing only a-z, 0-9, and spaces.
+                A lowercase string containing only a-z, 0-9 characters and potentially spaces.
         """
-        return ''.join([ch for ch in text.lower() if ch in string.ascii_lowercase + "0123456789" + " "])
+        charset = string.ascii_lowercase + "0123456789"
+        
+        if with_spaces:
+            charset += " "
+
+        return ''.join([ch for ch in text.lower() if ch in charset])
