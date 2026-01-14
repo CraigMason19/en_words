@@ -118,7 +118,10 @@ class MorseCode(Cipher):
             str:
                 A space-separated Morse code string.
         """
-        return ' '.join([MORSE_LOOKUP[ch] for ch in CleanInput.alphanumeric_with_space(text)])
+        tokens = CleanInput.alphanumeric_with_space(text).split()
+        clean_str = ' '.join(tokens).lower()
+
+        return ' '.join([MORSE_LOOKUP[ch] for ch in clean_str])
     
     encode_as_str = encode # Alias 
 
