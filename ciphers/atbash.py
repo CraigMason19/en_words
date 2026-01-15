@@ -21,9 +21,9 @@ https://exercism.org/tracks/javascript/exercises/atbash-cipher
 
 import string
 
-class Atbash:
-    _ATBASH_MAP = {a: b for a, b in zip(string.ascii_letters, string.ascii_lowercase[::-1] + string.ascii_uppercase[::-1])} 
+ATBASH_LOOKUP = {a: b for a, b in zip(string.ascii_letters, string.ascii_lowercase[::-1] + string.ascii_uppercase[::-1])} 
 
+class Atbash: 
     @classmethod
     def encode_letter(cls, letter: str) -> str:
         """
@@ -49,7 +49,7 @@ class Atbash:
             str:
                 The encoded (or decoded) character.
         """
-        return cls._ATBASH_MAP.get(letter, letter)
+        return ATBASH_LOOKUP.get(letter, letter)
     
     @classmethod
     def encode(cls, text: str) -> str:
