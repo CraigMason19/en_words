@@ -23,7 +23,7 @@ def chunk_text(text: str, chunk_size: int = 5) -> str:
 
 class CleanInput:
     @classmethod
-    def alphabetical(cls, text: str, with_spaces: bool = False) -> str:
+    def to_alpha(cls, text: str, with_spaces: bool = False) -> str:
         """
         Converts a string to lowercase and removes all characters that are not 
         letters.
@@ -53,7 +53,7 @@ class CleanInput:
         return ''.join([ch for ch in text.lower() if ch in charset])
 
     @classmethod
-    def alphanumeric(cls, text: str, with_spaces: bool = False) -> str:
+    def to_alphanumeric(cls, text: str, with_spaces: bool = False) -> str:
         """
         Converts a string to lowercase and removes all characters that are not 
         letters or digits.
