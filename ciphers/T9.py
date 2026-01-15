@@ -1,22 +1,20 @@
-from .utils import CleanInput
+from .utils import CleanInput, ENCODING_DELIMITER
 
-ENCODING_DELIMITER: str = "-"
-
-lookup = [
+T9_LOOKUP = [
                  ('abc',  2), ('def',  3), 
     ('ghi',  4), ('jkl',  5), ('mno',  6), 
     ('pqrs', 7), ('tuv',  8), ('wxyz', 9)
 ]
 
-digit_map = {}
-for letters, num in lookup:
+DIGIT_MAP = {}
+for letters, num in T9_LOOKUP:
     for ch in letters:
-        digit_map[ch] = str(num)
+        DIGIT_MAP[ch] = str(num)
 
-presses_map = {}
-for letters, _ in lookup:
+PRESSES_MAP = {}
+for letters, _ in T9_LOOKUP:
     for i, letter in enumerate(letters, start=1):
-        presses_map[letter] = i
+        PRESSES_MAP[letter] = i
 
 def presses_for_letter(ch: str) -> int:
     """
@@ -36,7 +34,7 @@ def presses_for_letter(ch: str) -> int:
     ch = ch.lower()
 
     try:
-        return presses_map[ch]
+        return PRESSES_MAP[ch]
     except KeyError:          
         raise ValueError(f"Parameter passed was not a letter in the T9 lookup: {ch}")
 
@@ -54,7 +52,7 @@ def letter_from_presses(number: int, count: int) -> str:
     Raises:
         ValueError: If the digit is not valid or count is out of range.
     """
-    for letters, digit in lookup:
+    for letters, digit in T9_LOOKUP:
         if number == digit:
             if 1 <= count <= len(letters):
                 return letters[count - 1]
@@ -89,7 +87,7 @@ class T9Cipher:
         Returns:
             str: Encoded numeric string, with non-alphabetic characters removed
         """
-        return ''.join(digit_map.get(ch.lower(), '') for ch in CleanInput.alphabetical(text))
+        return ''.join(DIGIT_MAP.get(ch.lower(), '') for ch in CleanInput.to_alpha(text))
 
 
 class ReversibleT9Cipher:
@@ -129,9 +127,9 @@ class ReversibleT9Cipher:
         """
         letters = []
 
-        for ch in CleanInput.alphabetical(text):
-            if(ch in digit_map):
-                letters.append(digit_map[ch] * presses_map[ch])
+        for ch in CleanInput.to_alpha(text):
+            if(ch in DIGIT_MAP):
+                letters.append(DIGIT_MAP[ch] * PRESSES_MAP[ch])
                 continue
 
             letters.append(ch)
