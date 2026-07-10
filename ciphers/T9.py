@@ -1,4 +1,6 @@
-from .utils import CleanInput, ENCODING_DELIMITER
+from .utils import CleanInput
+
+T9_ENCODING_DELIMITER = "-"
 
 T9_LOOKUP = [
                  ('abc',  2), ('def',  3), 
@@ -134,7 +136,7 @@ class ReversibleT9Cipher:
 
             letters.append(ch)
             
-        return ENCODING_DELIMITER.join(letters)
+        return T9_ENCODING_DELIMITER.join(letters)
 
     @classmethod
     def decode(cls, encoded_text: str) -> str:
@@ -161,9 +163,9 @@ class ReversibleT9Cipher:
                 encoding delimiter, or if any part between delimiters is empty.
         """
         if not encoded_text or not all(c.isdigit() or c == '-' for c in encoded_text):
-            raise ValueError(f"Encoded text must contain digits and use '{ENCODING_DELIMITER}' as the delimiter.")
+            raise ValueError(f"Encoded text must contain digits and use '{T9_ENCODING_DELIMITER}' as the delimiter.")
         
-        parts = encoded_text.split(ENCODING_DELIMITER)
+        parts = encoded_text.split(T9_ENCODING_DELIMITER)
 
         if any(part == '' for part in parts):
             raise ValueError("Encoded text contains empty chunks due to consecutive delimiters.")
