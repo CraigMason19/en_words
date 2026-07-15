@@ -155,12 +155,12 @@ class ReversibleT9Cipher:
         Args:
             encoded_text (str): ReversibleT9Cipher encoded string.
 
-        Returns:
-            str: Decoded lowercase string with letters only.
-
-        Raises
+        Raises:
             ValueError: If the encoded string does not contain any digits or the
                 encoding delimiter, or if any part between delimiters is empty.
+
+        Returns:
+            str: Decoded lowercase string with letters only.
         """
         if not encoded_text or not all(c.isdigit() or c == '-' for c in encoded_text):
             raise ValueError(f"Encoded text must contain digits and use '{T9_ENCODING_DELIMITER}' as the delimiter.")
