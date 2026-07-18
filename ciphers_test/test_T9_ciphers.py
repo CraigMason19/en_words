@@ -31,6 +31,11 @@ class TestT9Cipher(unittest.TestCase):
         result = T9Cipher.encode(word)
         self.assertEqual(result, expected)
 
+    def test_decode_raises_not_implemented(self):
+        with self.assertRaises(NotImplementedError):
+            T9Cipher.decode("test")
+
+
 class TestReversibleT9Cipher(unittest.TestCase):
     def test_encode_with_punctuation(self):
         word = "Hello!!!"
