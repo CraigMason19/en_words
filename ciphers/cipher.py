@@ -19,6 +19,8 @@ class Cipher(ABC):
             Prevent instantiation of cipher classes.
         encode(cls, text: str) -> str:
             Encode the given text using the cipher.
+        decode(cls, text: str) -> str:
+            Decodes the given text using the cipher.
     """
 
     def __new__(cls, *args, **kwargs): 
