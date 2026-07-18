@@ -1,3 +1,4 @@
+from .cipher import Cipher
 from .utils import CleanInput
 
 T9_ENCODING_DELIMITER = "-"
@@ -64,7 +65,7 @@ def letter_from_presses(number: int, count: int) -> str:
     raise ValueError(f"Digit {number} is not valid in T9 lookup")
 
 
-class T9Cipher:
+class T9Cipher(Cipher):
     """    
     A one-way lossy T9-style cipher that maps letters to numbers based on a 
     classic mobile phone keypad layout.
@@ -72,7 +73,7 @@ class T9Cipher:
     This implementation is not reversible because multiple letters map to the
     same digit. 
     
-    e.g. 'a', 'b', and 'c' all map to '2'. 
+    e.g. 'a', 'b', and 'c' all map to '2'. so '22' may be 'aa' or 'b'.
     """
     @classmethod
     def encode(cls, text: str) -> str:
@@ -91,6 +92,21 @@ class T9Cipher:
         """
         return ''.join(DIGIT_MAP.get(ch.lower(), '') for ch in CleanInput.to_alpha(text))
 
+    @classmethod
+    def decode(cls, text: str) -> str:
+        """
+        Decoding is not guaranteed to be possible using this encoding method. 
+        As '22' might mean 'b' or 'aa'.
+
+        So instead the decode method raises a NotImplementedError.
+        
+        Raises:
+            NotImplementedError:
+                Due to ambiguity of the encoding method.
+        """
+        raise NotImplementedError(
+            f"{cls.__name__} does not support decoding."
+        )
 
 class ReversibleT9Cipher:
     """
