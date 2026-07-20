@@ -121,6 +121,12 @@ class ReversibleT9Cipher:
     `ENCODING_DELIMITER` ("-").
 
     NOTE: Case is not preserved and output will always be lowercase.
+
+    Methods:
+        encode(cls, text: str) -> str:
+            Encodes a string into another string representing numeric representation.
+        decode(cls, encoded_text: str) -> str:
+            Decodes a string into its original representation.
     """
     @classmethod
     def encode(cls, text: str) -> str:
