@@ -8,6 +8,12 @@ class TestCaesar(unittest.TestCase):
         with self.assertRaises(TypeError):
             _ = Caesar()
 
+    def test_name_attribute(self):
+        result = Caesar.NAME
+        expected = "Caesar"
+
+        self.assertEqual(result, expected)
+
 
 class TestCaesarIsValidShift(unittest.TestCase):
     def test_negative_shift_is_false(self):

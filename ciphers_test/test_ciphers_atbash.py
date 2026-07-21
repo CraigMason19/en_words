@@ -15,6 +15,12 @@ class TestAtbashEncode(unittest.TestCase):
 
         self.assertEqual(result, expected)
 
+    def test_name_attribute(self):
+        result = Atbash.NAME
+        expected = "Atbash"
+
+        self.assertEqual(result, expected)
+
 
 class TestAtbashDecode(unittest.TestCase):
     def test_decode_lowercase(self):

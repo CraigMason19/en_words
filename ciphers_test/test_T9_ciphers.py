@@ -3,6 +3,12 @@ import unittest
 from ciphers.T9 import T9Cipher, ReversibleT9Cipher
 
 class TestT9Cipher(unittest.TestCase):
+    def test_name_attribute(self):
+        result = T9Cipher.NAME
+        expected = "T9Cipher"
+
+        self.assertEqual(result, expected)
+
     def test_encode(self):
         word = "craig"
         expected = "27244"
@@ -37,6 +43,12 @@ class TestT9Cipher(unittest.TestCase):
 
 
 class TestReversibleT9Cipher(unittest.TestCase):
+    def test_name_attribute(self):
+        result = ReversibleT9Cipher.NAME
+        expected = "ReversibleT9Cipher"
+
+        self.assertEqual(result, expected)
+
     def test_encode_with_punctuation(self):
         word = "Hello!!!"
         expected = "44-33-555-555-666"

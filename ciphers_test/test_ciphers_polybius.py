@@ -6,7 +6,13 @@ from ciphers.polybius_checkerboard import PolybiusCheckerboard
 class TestPolybius(unittest.TestCase):
     def test_instantiation_causes_error(self):
         with self.assertRaises(TypeError):
-            pc = PolybiusCheckerboard()
+            _ = PolybiusCheckerboard()
+
+    def test_name_attribute(self):
+        result = PolybiusCheckerboard.NAME
+        expected = "PolybiusCheckerboard"
+
+        self.assertEqual(result, expected)
 
 
 class TestPolybiusIsValidEncoding(unittest.TestCase):

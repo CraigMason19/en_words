@@ -8,6 +8,12 @@ class TestMorseCode(unittest.TestCase):
         with self.assertRaises(TypeError):
             _ = MorseCode()
 
+    def test_name_attribute(self):
+        result = MorseCode.NAME
+        expected = "MorseCode"
+
+        self.assertEqual(result, expected)
+        
 
 class TestMorseCodeIsValidCharset(unittest.TestCase):      
     def test_valid(self):

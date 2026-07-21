@@ -8,6 +8,13 @@ class TestA1Z26(unittest.TestCase):
         with self.assertRaises(TypeError):
             _ = A1Z26()
 
+    def test_name_attribute(self):
+        result = A1Z26.NAME
+        expected = "A1Z26"
+
+        self.assertEqual(result, expected)
+
+
 class TestA1Z26Encode(unittest.TestCase):      
     def test_encode(self):
         result = A1Z26.encode("Hello")
