@@ -14,6 +14,10 @@ class Cipher(ABC):
     Subclasses must implement `encode` and `decode` as class methods.
     Cipher classes are stateless and must not be instantiated.
 
+    Attributes:
+        NAME (str):
+            A class attribute helper to get the ciphers name easily.
+
     Methods:
         __new__(cls, *args, **kwargs): 
             Prevent instantiation of cipher classes.
@@ -22,7 +26,14 @@ class Cipher(ABC):
         decode(cls, text: str) -> str:
             Decodes the given text using the cipher.
     """
+    NAME: str
 
+    def __init_subclass__(cls):
+        """
+        """
+        super().__init_subclass__()
+        cls.NAME = cls.__name__
+    
     def __new__(cls, *args, **kwargs): 
         """
         Prevent instantiation of cipher classes.
