@@ -20,6 +20,14 @@ class TestCipher(unittest.TestCase):
         self.assertIsInstance(Cipher.__dict__['encode'], classmethod)
         self.assertIsInstance(Cipher.__dict__['decode'], classmethod)
 
+    def test_cipher_encode_raises_not_implemented(self):
+        with self.assertRaises(NotImplementedError):
+            _ = Cipher.encode("foo")
+
+    def test_cipher_decode_raises_not_implemented(self):
+        with self.assertRaises(NotImplementedError):
+            _ = Cipher.decode("foo")
+
 
 if __name__ == '__main__': # pragma: no cover
     unittest.main()
