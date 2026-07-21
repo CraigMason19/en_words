@@ -108,7 +108,7 @@ class T9Cipher(Cipher):
             f"{cls.__name__} does not support decoding."
         )
 
-class ReversibleT9Cipher:
+class ReversibleT9Cipher(Cipher):
     """
     A reversible T9-style cipher for encoding and decoding text using the 
     classic mobile phone keypad layout.

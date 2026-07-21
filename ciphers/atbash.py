@@ -21,9 +21,11 @@ https://exercism.org/tracks/javascript/exercises/atbash-cipher
 
 import string
 
+from ciphers.cipher import Cipher
+
 ATBASH_LOOKUP = {a: b for a, b in zip(string.ascii_letters, string.ascii_lowercase[::-1] + string.ascii_uppercase[::-1])} 
 
-class Atbash: 
+class Atbash(Cipher): 
     @classmethod
     def encode_letter(cls, letter: str) -> str:
         """
