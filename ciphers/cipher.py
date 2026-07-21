@@ -46,7 +46,7 @@ class Cipher(ABC):
             str:
                 The encoded cipher-text string.
         """
-        pass # pragma: no cover
+        raise NotImplementedError
         
     @classmethod
     @abstractmethod
@@ -62,4 +62,4 @@ class Cipher(ABC):
             str:
                 The decoded plain-text string.
         """
-        pass # pragma: no cover
+        raise NotImplementedError
