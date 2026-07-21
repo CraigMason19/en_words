@@ -41,17 +41,17 @@ class PolybiusCheckerboard(Cipher):
             The grid representation of the checkerboard.
 
     Methods:
-        is_valid_encoding(cls, text: str) -> bool:
+        is_valid_encoding(text: str) -> bool:
             Determines if a string is a valid Polybius encoded string. 
-        cell(cls, column: int, row: int) -> str:
+        cell(column: int, row: int) -> str:
             Returns the letter in the cell specified by the column then row.
-        cell_coords(cls, letter: str) -> str:
+        cell_coords(letter: str) -> str:
             Returns the co-ordinates of the letter in the checkerboard.
-        encode(cls, message: str) -> str:
+        encode(message: str) -> str:
             Returns the encoded message as a string of 2-digit numbers.
-        decode(cls, message: str) -> str:
+        decode(message: str) -> str:
             Decodes a string of space separated 2-digit numbers to uppercase letters.
-        def pretty_print(cls) -> None:
+        def pretty_print() -> None:
             Prints out the checkerboard in a formatted grid view.
     """
     _GRID = [
@@ -63,8 +63,8 @@ class PolybiusCheckerboard(Cipher):
         [5, 'V', 'W', 'X', 'Y', 'Z'],
     ]
 
-    @classmethod
-    def is_valid_encoding(cls, text: str) -> bool:
+    @staticmethod
+    def is_valid_encoding(text: str) -> bool:
         """
         Determines if a string is a valid Polybius encoded string. 
         
@@ -86,8 +86,8 @@ class PolybiusCheckerboard(Cipher):
         
         return bool(pattern.match(text))
 
-    @classmethod
-    def cell(cls, column: int, row: int) -> str:
+    @staticmethod
+    def cell(column: int, row: int) -> str:
         """ 
         Returns the letter in the cell specified by the column then row.
 
@@ -115,10 +115,10 @@ class PolybiusCheckerboard(Cipher):
         if row < 1 or row > 5:
             raise IndexError("Row index must be in the 1-5 range.")
 
-        return cls._GRID[column][row]
+        return PolybiusCheckerboard._GRID[column][row]
 
-    @classmethod
-    def cell_coords(cls, letter: str) -> str:
+    @staticmethod
+    def cell_coords(letter: str) -> str:
         """ 
         Returns the co-ordinates of the letter in the checkerboard. Specified by
         the column then row. Case is irrelevant.
@@ -145,13 +145,13 @@ class PolybiusCheckerboard(Cipher):
 
         letter = 'I' if (letter == "J") else letter
 
-        for i, row in enumerate(cls._GRID):
+        for i, row in enumerate(PolybiusCheckerboard._GRID):
             for j, col in enumerate(row):
-                if cls._GRID[i][j] == letter:
+                if PolybiusCheckerboard._GRID[i][j] == letter:
                     return (str(i) + str(j))
 
-    @classmethod
-    def encode(cls, message: str) -> str:
+    @staticmethod
+    def encode(message: str) -> str:
         """
         Returns the encoded message as a string of 2-digit numbers. Only letters
         are encoded. Other symbols are ignored (Space included).
@@ -173,10 +173,10 @@ class PolybiusCheckerboard(Cipher):
         clean = CleanInput.to_alpha(message).upper()
         clean = clean.replace('J', 'I') # interchangeable
 
-        return ' '.join([cls.cell_coords(c) for c in clean])
+        return ' '.join([PolybiusCheckerboard.cell_coords(c) for c in clean])
 
-    @classmethod
-    def decode(cls, message: str) -> str:
+    @staticmethod
+    def decode(message: str) -> str:
         """
         Decodes a string of space separated 2-digit numbers to uppercase letters.
         
@@ -198,19 +198,19 @@ class PolybiusCheckerboard(Cipher):
             str: 
                 A uppercase string without spaces or punctuation containing the original text.
         """       
-        if not cls.is_valid_encoding(message):
+        if not PolybiusCheckerboard.is_valid_encoding(message):
             raise ValueError("Couldn't decode non properly formatted encoding string")
     
         decoded = []
 
         for _ in message.split():
             h, v = int(_[0]), int(_[1])
-            decoded.append(cls.cell(h, v))
+            decoded.append(PolybiusCheckerboard.cell(h, v))
 
         return ''.join(decoded)
 
-    @classmethod
-    def pretty_print(cls) -> None: # pragma no cover
+    @staticmethod
+    def pretty_print() -> None: # pragma no cover
         """ 
         Prints out the checkerboard in a formatted grid view. 
 
@@ -223,5 +223,5 @@ class PolybiusCheckerboard(Cipher):
             4    Q    R    S    T    U    
             5    V    W    X    Y    Z
         """  
-        for r in cls._GRID:
+        for r in PolybiusCheckerboard._GRID:
             print(("{: <5}" * 6).format(*r)) 

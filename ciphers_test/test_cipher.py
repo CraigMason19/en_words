@@ -3,7 +3,7 @@ import unittest
 from ciphers.cipher import Cipher
 
 
-class BadCipher(Cipher):
+class EmptyCipher(Cipher):
     pass
 
 
@@ -14,11 +14,11 @@ class TestCipher(unittest.TestCase):
 
     def test_cant_instantiate_subclass_without_implementation(self):
         with self.assertRaises(TypeError):
-            _ = BadCipher()
+            _ = EmptyCipher()
 
-    def test_cipher_methods_are_class_methods(self):
-        self.assertIsInstance(Cipher.__dict__['encode'], classmethod)
-        self.assertIsInstance(Cipher.__dict__['decode'], classmethod)
+    def test_cipher_methods_are_static_methods(self):
+        self.assertIsInstance(Cipher.__dict__['encode'], staticmethod)
+        self.assertIsInstance(Cipher.__dict__['decode'], staticmethod)
 
     def test_cipher_encode_raises_not_implemented(self):
         with self.assertRaises(NotImplementedError):

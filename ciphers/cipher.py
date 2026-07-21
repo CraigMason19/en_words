@@ -21,9 +21,9 @@ class Cipher(ABC):
     Methods:
         __new__(cls, *args, **kwargs): 
             Prevent instantiation of cipher classes.
-        encode(cls, text: str) -> str:
+        encode(text: str) -> str:
             Encode the given text using the cipher.
-        decode(cls, text: str) -> str:
+        decode(text: str) -> str:
             Decodes the given text using the cipher.
     """
     NAME: str
@@ -43,9 +43,9 @@ class Cipher(ABC):
         """
         raise TypeError("Cipher types cannot be instantiated")
 
-    @classmethod
+    @staticmethod
     @abstractmethod 
-    def encode(cls, text: str) -> str:
+    def encode(text: str) -> str:
         """
         Encodes the given text using the cipher.
 
@@ -59,9 +59,9 @@ class Cipher(ABC):
         """
         raise NotImplementedError
         
-    @classmethod
+    @staticmethod
     @abstractmethod
-    def decode(cls, text: str) -> str:
+    def decode(text: str) -> str:
         """
         Decodes the given text using the cipher.
 

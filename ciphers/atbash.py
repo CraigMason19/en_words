@@ -26,8 +26,8 @@ from ciphers.cipher import Cipher
 ATBASH_LOOKUP = {a: b for a, b in zip(string.ascii_letters, string.ascii_lowercase[::-1] + string.ascii_uppercase[::-1])} 
 
 class Atbash(Cipher): 
-    @classmethod
-    def encode_letter(cls, letter: str) -> str:
+    @staticmethod
+    def encode_letter(letter: str) -> str:
         """
         Encodes or decodes a single character using the Atbash cipher.
 
@@ -53,8 +53,8 @@ class Atbash(Cipher):
         """
         return ATBASH_LOOKUP.get(letter, letter)
     
-    @classmethod
-    def encode(cls, text: str) -> str:
+    @staticmethod
+    def encode(text: str) -> str:
         """
         Encodes a string using the Atbash cipher.
 
@@ -77,6 +77,6 @@ class Atbash(Cipher):
             str:
                 The encoded text.
         """   
-        return ''.join([cls.encode_letter(l) for l in text])
+        return ''.join([Atbash.encode_letter(l) for l in text])
 
     decode = encode # Alias

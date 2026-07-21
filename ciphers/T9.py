@@ -75,8 +75,8 @@ class T9Cipher(Cipher):
     
     e.g. 'a', 'b', and 'c' all map to '2'. so '22' may be 'aa' or 'b'.
     """
-    @classmethod
-    def encode(cls, text: str) -> str:
+    @staticmethod
+    def encode(text: str) -> str:
         """
         Encode a string into its T9 numeric representation.
 
@@ -92,8 +92,8 @@ class T9Cipher(Cipher):
         """
         return ''.join(DIGIT_MAP.get(ch.lower(), '') for ch in CleanInput.to_alpha(text))
 
-    @classmethod
-    def decode(cls, text: str) -> str:
+    @staticmethod
+    def decode(text: str) -> str:
         """
         Decoding is not guaranteed to be possible using this encoding method. 
         As '22' might mean 'b' or 'aa'.
@@ -105,7 +105,7 @@ class T9Cipher(Cipher):
                 Due to ambiguity of the encoding method.
         """
         raise NotImplementedError(
-            f"{cls.__name__} does not support decoding."
+            f"{T9Cipher.NAME} does not support decoding."
         )
 
 class ReversibleT9Cipher(Cipher):
@@ -123,13 +123,13 @@ class ReversibleT9Cipher(Cipher):
     NOTE: Case is not preserved and output will always be lowercase.
 
     Methods:
-        encode(cls, text: str) -> str:
+        encode(text: str) -> str:
             Encodes a string into another string representing numeric representation.
-        decode(cls, encoded_text: str) -> str:
+        decode(encoded_text: str) -> str:
             Decodes a string into its original representation.
     """
-    @classmethod
-    def encode(cls, text: str) -> str:
+    @staticmethod
+    def encode(text: str) -> str:
         """
         Encode a string into a reversible T9 numeric representation.
 
@@ -160,8 +160,8 @@ class ReversibleT9Cipher(Cipher):
             
         return T9_ENCODING_DELIMITER.join(letters)
 
-    @classmethod
-    def decode(cls, encoded_text: str) -> str:
+    @staticmethod
+    def decode(encoded_text: str) -> str:
         """
         Decodes a ReversibleT9Cipher string into its original representation.
 

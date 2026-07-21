@@ -29,9 +29,9 @@ class Caesar(Cipher):
     Methods:
         _is_valid_shift(shift: int=3):
             Checks if the shift amount is greater than 0 and less than 26.
-        encode(cls, message: str, shift=3) -> str:
+        encode(message: str, shift=3) -> str:
             Encode a string using the Caesar cipher.
-        decode(cls, message: str, shift=3) -> str:
+        decode(message: str, shift=3) -> str:
             Decodes a string using the Caesar cipher.
     """
 
@@ -57,8 +57,8 @@ class Caesar(Cipher):
         
         return False
         
-    @classmethod
-    def encode(cls, text: str, shift: int=3) -> str:
+    @staticmethod
+    def encode(text: str, shift: int=3) -> str:
         """
         Encode a string using the Caesar cipher.
 
@@ -84,7 +84,7 @@ class Caesar(Cipher):
             str:
                 The encoded text.
         """   
-        if not cls._is_valid_shift(shift):
+        if not Caesar._is_valid_shift(shift):
             raise ValueError("Caesar cipher shift must be greater than 0 and less than 26.")
 
         encoded_tokens = []
@@ -95,8 +95,8 @@ class Caesar(Cipher):
 
         return ''.join(encoded_tokens)
 
-    @classmethod
-    def decode(cls, text: str, shift=3) -> str:
+    @staticmethod
+    def decode(text: str, shift=3) -> str:
         """
         Decodes a string using the Caesar cipher.
 
@@ -122,7 +122,7 @@ class Caesar(Cipher):
             str:
                 The encoded text.
         """   
-        if not cls._is_valid_shift(shift):
+        if not Caesar._is_valid_shift(shift):
             raise ValueError("Caesar cipher shift must be greater than 0 and less than 26.")
 
         decoded_tokens = []

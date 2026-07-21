@@ -71,8 +71,8 @@ MORSE_LOOKUP = {
 REVERSE_MORSE_LOOKUP = {v: k for k, v in MORSE_LOOKUP.items()}
 
 class MorseCode(Cipher):
-    @classmethod
-    def is_valid_charset(cls, text: str) -> bool:
+    @staticmethod
+    def is_valid_charset(text: str) -> bool:
         """
         Returns True if the string contains only characters from the following
         charset: 
@@ -96,8 +96,8 @@ class MorseCode(Cipher):
         pattern = re.compile(r'^[/ .-]+$', re.ASCII)
         return bool(pattern.match(text))
 
-    @classmethod
-    def encode(cls, text: str) -> str:
+    @staticmethod
+    def encode(text: str) -> str:
         """   
         Encodes a string into Morse code as a single space-separated string.
 
@@ -125,8 +125,8 @@ class MorseCode(Cipher):
     
     encode_as_str = encode # Alias 
 
-    @classmethod
-    def encode_as_list(cls, text: str) -> list[str]:
+    @staticmethod
+    def encode_as_list(text: str) -> list[str]:
         """
         Encodes a string into Morse code as a list of symbols.
 
@@ -146,10 +146,10 @@ class MorseCode(Cipher):
             list[str]:
                 A list of Morse code symbols.
         """
-        return cls.encode(text).split()
+        return MorseCode.encode(text).split()
     
-    @classmethod
-    def decode(cls, text: str) -> str:
+    @staticmethod
+    def decode(text: str) -> str:
         """
         Decodes a string of dots and dashes to english text.
             
@@ -176,7 +176,7 @@ class MorseCode(Cipher):
             str:
                 A decoded morse string.
         """       
-        if not cls.is_valid_charset(text):
+        if not MorseCode.is_valid_charset(text):
             raise ValueError("Input contains characters outside the Morse charset. '.- /'")
 
         decoded = []
