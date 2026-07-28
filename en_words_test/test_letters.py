@@ -195,22 +195,22 @@ class TestLetters(unittest.TestCase):
         self.assertEqual(letters.caesar_cipher('A', -1), 'Z')
         self.assertEqual(letters.caesar_cipher('a', -2), 'y')
 
-    # @patch('letters.random')            
-    # def test_random_lower_letter(self, random):
-    #     random.choice._mock_side_effect = self.random.choice
+    @patch('en_words.letters.random')            
+    def test_random_lower_letter(self, random):
+        random.choice._mock_side_effect = self.random.choice
 
-    #     self.assertEqual(letters.random_lower_letter(), 'z')
+        self.assertEqual(letters.random_lower_letter(), 'z')
 
-    # @patch('letters.random') 
-    # def test_random_upper_letter(self, random):
-    #     random.choice._mock_side_effect = self.random.choice
-    #     self.assertEqual(letters.random_upper_letter(), 'Z')
+    @patch('en_words.letters.random') 
+    def test_random_upper_letter(self, random):
+        random.choice._mock_side_effect = self.random.choice
+        self.assertEqual(letters.random_upper_letter(), 'Z')
 
-    # @patch('letters.random') 
-    # def test_random_letter(self, random):
-    #     random.choice._mock_side_effect = self.random.choice
+    @patch('en_words.letters.random') 
+    def test_random_letter(self, random):
+        random.choice._mock_side_effect = self.random.choice
 
-    #     self.assertEqual(letters.random_letter(), 'Z')
+        self.assertEqual(letters.random_letter(), 'Z')
 
 
 class TestLetterFrequencies(unittest.TestCase):
