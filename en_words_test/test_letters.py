@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 from random import Random
 
-import en_words.letters as letters
+from en_words import letters
 
 
 class TestLetters(unittest.TestCase):
@@ -47,8 +47,6 @@ class TestLetters(unittest.TestCase):
         self.assertFalse(result)
 
 
-
-
     def test_letter_to_index(self):
         self.assertEqual(letters.letter_to_index('a'), 0)
         self.assertEqual(letters.letter_to_index('A'), 0)
@@ -62,6 +60,7 @@ class TestLetters(unittest.TestCase):
         for i, letter in enumerate(self.alphabet):
             self.assertEqual(letters.letter_to_index(letter.lower()), i)
             self.assertEqual(letters.letter_to_index(letter.capitalize()), i)
+
 
     def test_index_to_letter(self):
         self.assertEqual(letters.index_to_letter(0), 'a')
