@@ -370,7 +370,7 @@ def anagrams_gen(word: str, filename_sorted: str = _FILENAME_SORTED):
             The name of the file containing the sorted dictionary.
 
     Returns:
-        A generator.
+        Generator:
     """ 
     word = word.lower()
 
