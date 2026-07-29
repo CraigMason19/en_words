@@ -8,7 +8,7 @@
 #              Makes use of a sorted dictionary (sorted by length as well as 
 #              alphabetically) for faster lookups, a helper function
 #              called create_sorted_dict will create one from a normal 
-#              alphabetised dictionary.
+#              alphabetized dictionary.
 #
 # Links:        
 #

@@ -39,7 +39,7 @@ def letter_to_index(letter):
 
 		Args:
 			letter:
-				The letter whoose index we want to find.
+				The letter whose index we want to find.
 
 		Returns:
 			An integer index of the relevant letter.
@@ -54,7 +54,7 @@ def index_to_letter(index, upper=False):
 			index:
 				The index of the letter we want to find.
 			upper:
-				A flag to determine wheter we return a upper or lower case letter.
+				A flag to determine whether we return a upper or lower case letter.
 
 		Returns:
 			A letter either in upper or lowercase.
