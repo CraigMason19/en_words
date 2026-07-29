@@ -342,28 +342,31 @@ def words_from_letters(letters, min_len=3, max_len=6, remove_doubles=False, file
 
     return(words)
 
-def anagrams(word, filename_sorted=_FILENAME_SORTED):
-    """ Finds a list of words that are anagrams of a word.
+def anagrams(word: str, filename_sorted: str = _FILENAME_SORTED) -> list[str]:
+    """ 
+    Finds a list of words that are anagrams of a word.
 
     Args:
-        word:
+        word (str):
             A string of letters to find anagrams for.
-        filename_sorted:
+        filename_sorted (str):
             The name of the file containing the sorted dictionary.
 
     Returns:
-        A list.
+        list[str]:
+            A list of all the anagrams found.
     """ 
     return [_ for _ in anagrams_gen(word, filename_sorted)]
 
 
-def anagrams_gen(word, filename_sorted=_FILENAME_SORTED):
-    """ Finds a list of words that are anagrams of a word and returns a generator.
+def anagrams_gen(word: str, filename_sorted: str = _FILENAME_SORTED):
+    """ 
+    Finds a list of words that are anagrams of a word and returns a generator.
 
     Args:
-        word:
+        word (str):
             A string of letters to find anagrams for.
-        filename_sorted:
+        filename_sorted (str):
             The name of the file containing the sorted dictionary.
 
     Returns:
