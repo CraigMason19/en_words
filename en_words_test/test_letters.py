@@ -226,12 +226,16 @@ class TestLetterFrequencies(unittest.TestCase):
         with self.assertRaises(ValueError):
             letters.LetterFrequency.percentage("invalid_key")
 
-    def test_letters_frequency_upper_and_lower_doesnt_raise_value_error(self):
-        try:
-            a = letters.LetterFrequency.percentage("e")
-            b = letters.LetterFrequency.percentage("E")
-        except ValueError:
-            self.fail("ValueError was raised unexpectedly")
+    def test_letters_frequency_lowercase(self):
+        result = letters.LetterFrequency.percentage("e")
 
-if __name__ == '__main__':
+        self.assertIsInstance(result, float)
+
+    def test_letters_frequency_uppercase(self):
+        result = letters.LetterFrequency.percentage("E")
+        
+        self.assertIsInstance(result, float)
+
+
+if __name__ == '__main__': # pragma no cover
     unittest.main()
