@@ -1,43 +1,9 @@
-#-------------------------------------------------------------------------------
-# Name:        test_en_words.py
-#
-# Notes:       A collections of tests for en_words.py
-#
-# Links:       
-#
-# TODO:        
-#-------------------------------------------------------------------------------
-
 import types
 import unittest
 
 from en_words import en_words
 
 class TestWords(unittest.TestCase):
-    #---------------------------------------------------------------------------
-    # setUpClass and tearDownClass run before and after all tests, called once
-    # NOTE - the camelCase syntax. Important that they are named this way.
-    #---------------------------------------------------------------------------
-    @classmethod
-    def setUpClass(cls):
-        pass
-
-    @classmethod
-    def tearDownClass(cls):
-        pass
-
-    #---------------------------------------------------------------------------
-    # setUp and tearDown run before every single test.
-    #---------------------------------------------------------------------------
-    def setUp(self):
-        pass
-
-    def tearDown(self):
-        pass
-
-    #---------------------------------------------------------------------------
-    # Tests
-    #---------------------------------------------------------------------------
     def test_dict_length(self):
         result = en_words.word_count()
         expected = 194433
@@ -99,20 +65,24 @@ class TestAnagrams(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_no_anagrams_returns_empty_list(self):
-        result = en_words("anagram")
+        result = en_words.anagrams("anagram")
         expected = []
 
         self.assertEqual(result, expected)
 
 
 class TestAnagramsGen(unittest.TestCase):
+    def test_anagrams_gen(self):
+        result = list(en_words.anagrams_gen("opts"))
+        expected = ['post', 'pots', 'spot', 'stop', 'tops']
+
+        self.assertEqual(result, expected)
+
     def test_anagrams_gen_returns_generator(self):
         result = en_words.anagrams_gen("opts")
 
         self.assertIsInstance(result, types.GeneratorType)
 
 
-
-
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma no cover
     unittest.main()
