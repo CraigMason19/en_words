@@ -8,6 +8,7 @@
 # TODO:        
 #-------------------------------------------------------------------------------
 
+import types
 import unittest
 
 from en_words import en_words
@@ -83,6 +84,35 @@ class TestWords(unittest.TestCase):
         result = en_words.letters_in_word('adls', 'salad')
         expected = True
         self.assertEqual(result, expected)
+
+
+class TestAnagrams(unittest.TestCase):
+    def test_anagrams_returns_list(self):
+        result = en_words.anagrams("opts")
+
+        self.assertIsInstance(result, list)
+
+    def test_finds_anagrams(self):
+        result = en_words.anagrams("opts")
+        expected = ['post', 'pots', 'spot', 'stop', 'tops']
+
+        self.assertEqual(result, expected)
+
+    def test_no_anagrams_returns_empty_list(self):
+        result = en_words("anagram")
+        expected = []
+
+        self.assertEqual(result, expected)
+
+
+class TestAnagramsGen(unittest.TestCase):
+    def test_anagrams_gen_returns_generator(self):
+        result = en_words.anagrams_gen("opts")
+
+        self.assertIsInstance(result, types.GeneratorType)
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
