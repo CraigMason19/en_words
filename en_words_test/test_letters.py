@@ -9,20 +9,7 @@ from random import Random
 from en_words import letters
 
 
-class TestLetters(unittest.TestCase):
-    #---------------------------------------------------------------------------
-    # setUp and tearDown run before every single test.
-    #---------------------------------------------------------------------------
-    def setUp(self):
-        self.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        self.random = Random(1024) # Set a seed so the random output is deterministic
-
-    def tearDown(self):
-        pass
-
-    #---------------------------------------------------------------------------
-    # Tests
-    #---------------------------------------------------------------------------
+class TestIsLetter(unittest.TestCase):
     def test_is_letter(self):
         result = letters.is_letter('e')        
         self.assertTrue(result)
@@ -45,6 +32,23 @@ class TestLetters(unittest.TestCase):
     def test_is_letter_more_than_one_letter(self):
         result = letters.is_letter('ab')        
         self.assertFalse(result)
+
+
+class TestLetters(unittest.TestCase):
+    #---------------------------------------------------------------------------
+    # setUp and tearDown run before every single test.
+    #---------------------------------------------------------------------------
+    def setUp(self):
+        self.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        self.random = Random(1024) # Set a seed so the random output is deterministic
+
+    def tearDown(self):
+        pass
+
+    #---------------------------------------------------------------------------
+    # Tests
+    #---------------------------------------------------------------------------
+
 
 
     def test_letter_to_index(self):
