@@ -83,6 +83,10 @@ class TestAnagramsGen(unittest.TestCase):
 
         self.assertIsInstance(result, types.GeneratorType)
 
+    def test_anagrams_gen_returns_only_strings(self):
+        for _ in en_words.anagrams_gen("opts"):
+            self.assertIsInstance(_, str)
+
 
 if __name__ == '__main__': # pragma no cover
     unittest.main()
