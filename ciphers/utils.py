@@ -4,21 +4,32 @@ from textwrap import wrap
 ENCODING_DELIMITER: str = '/'
 UNKNOWN_TOKEN = '_'
 
+
 def chunk_text(text: str, chunk_size: int = 5) -> str:
     """
-    Splits a string into fixed-length chunks separated by spaces.
+    Splits a string into fixed-length chunks separated by spaces. 
+    
+    Characters are preserved whereas spaces are not. The chunk_size must be 
+    positive.
 
     Args:
         text (str):
             The input string to be chunked.
         chunk_size (int):
-            The number of characters per chunk.
+            The number of characters per chunk. Must be greater than 0.
+
+    Raises:
+        ValueError:
+            If the chunk_size is less than 1.
 
     Returns:
         str:
             The chunked string with chunks separated by spaces.
     """
-    return ' '.join(wrap(text, chunk_size))
+    if chunk_size < 1:
+        raise ValueError("chunk_size cannot be less than 1: {chunk_size}")
+
+    return ' '.join(wrap(text.replace(' ', ''), chunk_size))
 
 
 class CleanInput:
