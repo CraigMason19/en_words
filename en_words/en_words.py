@@ -55,58 +55,65 @@ def create_sorted_dict(filename=_FILENAME, filename_sorted=_FILENAME_SORTED):
 
 # region Basic Reader functions
 
-def unsorted_words(filename=_FILENAME):
-    """ Returns a list of words from a dictionary not sorted by length.
+def unsorted_words(filename: str=_FILENAME) -> list[str]:
+    """ 
+    Returns a list of words from a dictionary (not sorted by length) and in 
+    lowercase.
 
     Args:
-        filename:
+        filename (str):
             The name of the file containing the dictionary.
 
     Returns:
-        A list of words.
+        list[str]:
+            A list of lowercase words.
     """
     with open(filename) as f:
         return f.read().lower().splitlines()
 
-def unsorted_words_gen(filename=_FILENAME):
-    """ A generator that returns a word from a dictionary not sorted by 
-        length.
+def unsorted_words_gen(filename: str=_FILENAME):
+    """ 
+    A generator that returns a list of words from a dictionary (not sorted by 
+    length) and in lowercase.
 
     Args:
-        filename:
+        filename (str):
             The name of the file containing the dictionary.
 
     Returns:
-        A generator.
+        Generator
     """
     with open(filename) as f:
         for line in f:
             yield line.lower().strip()
 
-def sorted_words(filename_sorted=_FILENAME_SORTED):
-    """ Returns a list of words from a dictionary sorted by length as well as
-        alphabetically.
+def sorted_words(filename_sorted=_FILENAME_SORTED) -> list[str]:
+    """ 
+    Returns a list of words from a dictionary sorted by length as well as 
+    alphabetically in lowercase.
 
     Args:
-        filename_sorted:
+        filename_sorted (str):
             The name of the file containing the sorted dictionary.
 
     Returns:
-        A list.
+        list[str]:
+            A list of lowercase words.
     """
     with open(filename_sorted) as f:
         return f.read().lower().splitlines()
 
-def sorted_words_gen(filename_sorted=_FILENAME_SORTED):
-    """ A generator that returns a word from a dictionary sorted by 
-        length and alphabetically.
+def sorted_words_gen(filename_sorted: str=_FILENAME_SORTED):
+    """ 
+    A generator that returns a word from a dictionary sorted by length and 
+    alphabetically in lowercase.
 
     Args:
-        filename_sorted:
+        filename_sorted (str):
             The name of the file containing the sorted dictionary.
 
     Returns:
-        A generator.
+        Generator
     """
     with open(filename_sorted) as f:
         for line in f:
