@@ -79,6 +79,7 @@ class TestSortedWordsGen(unittest.TestCase):
 
         self.assertIsInstance(result, types.GeneratorType)
 
+
 class TestAnagrams(unittest.TestCase):
     def test_anagrams_returns_list(self):
         result = en_words.anagrams("opts")
