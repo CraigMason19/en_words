@@ -159,17 +159,18 @@ def find_largest_word(filename=_FILENAME):
 
 #region Word Finder functions 
 
-def words_of_length(length=3, filename_sorted=_FILENAME_SORTED):
-    """ Returns a list of all words of a certain length.
+def words_of_length(length: int=3, filename_sorted: str=_FILENAME_SORTED) -> list[str]:
+    """ 
+    Returns a list of all words of a certain length.
 
     Args:
-        length:
+        length (int):
             The minimum number of letters to find.
-        filename_sorted:
+        filename_sorted (str):
             The name of the file containing the sorted dictionary.
 
     Returns:
-        A list.
+        list[str]
     """
     if length < 0:
         return []
@@ -180,24 +181,25 @@ def words_of_length(length=3, filename_sorted=_FILENAME_SORTED):
         letter_count = len(word)
 
         if letter_count > length:
-                break
+            break
 
         elif letter_count == length:
             words.append(word.lower())
 
     return words
 
-def words_of_length_gen(length=3, filename_sorted=_FILENAME_SORTED):
-    """ Returns a generator for finding all words of a certain length.
+def words_of_length_gen(length: int=3, filename_sorted: str=_FILENAME_SORTED):
+    """ 
+    Returns a generator for finding all words of a certain length.
 
     Args:
-        length:
+        length (int):
             The minimum number of letters to find.
-        filename_sorted:
+        filename_sorted (str):
             The name of the file containing the sorted dictionary.
 
     Returns:
-        A generator.
+        Generator
     """    
     if length < 0:
         return []
