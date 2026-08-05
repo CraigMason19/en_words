@@ -52,6 +52,33 @@ class TestWords(unittest.TestCase):
         self.assertEqual(result, expected)
 
 
+class TestUnsortedWords(unittest.TestCase):
+    def test_unsorted_words_returns_list(self):
+        result = en_words.unsorted_words()
+
+        self.assertIsInstance(result, list)
+
+
+class TestUnsortedWordsGen(unittest.TestCase):
+    def test_unsorted_words_gen_returns_generator(self):
+        result = en_words.unsorted_words_gen()
+
+        self.assertIsInstance(result, types.GeneratorType)
+
+
+class TestSortedWords(unittest.TestCase):
+    def test_sorted_words_returns_list(self):
+        result = en_words.sorted_words()
+
+        self.assertIsInstance(result, list)
+
+
+class TestSortedWordsGen(unittest.TestCase):
+    def test_sorted_words_gen_returns_generator(self):
+        result = en_words.sorted_words_gen()
+
+        self.assertIsInstance(result, types.GeneratorType)
+
 class TestAnagrams(unittest.TestCase):
     def test_anagrams_returns_list(self):
         result = en_words.anagrams("opts")
