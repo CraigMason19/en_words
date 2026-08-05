@@ -14,11 +14,6 @@ class TestWords(unittest.TestCase):
         expected = 'dichlorodiphenyltrichloroethane'
         self.assertEqual(result, expected)
 
-    def test_words_of_length(self):
-        result = len(en_words.words_of_length(4))
-        expected = 5368
-        self.assertEqual(result, expected)
-
     def test_potential_words(self):
         word = '_?tt-e'
         result = len(en_words.potential_words(word))
@@ -78,6 +73,45 @@ class TestSortedWordsGen(unittest.TestCase):
         result = en_words.sorted_words_gen()
 
         self.assertIsInstance(result, types.GeneratorType)
+
+
+class TestWordsOfLength(unittest.TestCase):
+    def test_words_of_length_negative(self):
+        result = en_words.words_of_length(-1)
+        expected = []
+
+        self.assertEqual(result, expected)
+
+    def test_words_of_length_zero(self):
+        result = en_words.words_of_length(0)
+        expected = []
+
+        self.assertEqual(result, expected)
+
+    def test_words_of_length(self):
+        result = len(en_words.words_of_length(4))
+        expected = 5368
+
+        self.assertEqual(result, expected)
+
+
+class TestWordsOfLengthGen(unittest.TestCase):
+    def test_words_of_length_gen_returns_generator(self):
+        result = en_words.words_of_length_gen(4)
+        
+        self.assertIsInstance(result, types.GeneratorType)
+
+    def test_words_of_length_gen_negative(self):
+        result = list(en_words.words_of_length_gen(-1))
+        expected = []
+
+        self.assertEqual(result, expected)
+
+    def test_words_of_length_gen_zero(self):
+        result = list(en_words.words_of_length_gen(0))
+        expected = []
+
+        self.assertEqual(result, expected)
 
 
 class TestAnagrams(unittest.TestCase):
