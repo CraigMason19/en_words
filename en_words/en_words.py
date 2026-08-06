@@ -19,6 +19,7 @@
 import os
 
 # region Globals
+
 _PATH = os.path.dirname(__file__)
 _NAME = 'en_words'
 
@@ -29,6 +30,8 @@ _FILENAME_SORTED = _PATH + "\\" + _NAME + "_sorted.txt"
 MISSING_CHARACTERS = '?-_.' 
 
 #endregion
+
+#region Dictionary Functions
 
 def create_sorted_dict(filename=_FILENAME, filename_sorted=_FILENAME_SORTED):
     """ Reads a dictionary in alphabetical order and then creates a file that is 
@@ -52,8 +55,6 @@ def create_sorted_dict(filename=_FILENAME, filename_sorted=_FILENAME_SORTED):
     with open(filename_sorted, 'w+') as f:
         for line in lines:
             f.write(line.lower())
-
-# region Basic Reader functions
 
 def unsorted_words(filename: str=_FILENAME) -> list[str]:
     """ 
