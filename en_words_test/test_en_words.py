@@ -20,12 +20,6 @@ class TestWords(unittest.TestCase):
         expected = 38
         self.assertEqual(result, expected)
  
-    def test_words_from_letters(self):
-        letters = "beetles"
-        result = len(en_words.words_from_letters(letters, min_len=3, max_len=5))
-        expected = 107
-        self.assertEqual(result, expected)
-
     def test_is_potential_match_01(self):
         result = en_words.is_potential_match("??ttl-", "battle", 'x', 'b')
         expected = True
@@ -112,6 +106,76 @@ class TestWordsOfLengthGen(unittest.TestCase):
         expected = []
 
         self.assertEqual(result, expected)
+
+
+class TestWordsFromLetters(unittest.TestCase):
+    def test_words_from_letters_returns_list(self):
+        letters = "beetles"
+        result = en_words.words_from_letters(letters, min_len=3, max_len=5)
+        
+        self.assertIsInstance(result, list)
+
+    def test_words_from_letters_returns_list_of_str(self):
+        letters = "beetles"
+        result = en_words.words_from_letters(letters, min_len=3, max_len=5)
+
+        for _ in result:
+            self.assertIsInstance(_, str)
+
+    def test_words_from_letters_min_len_negative(self):
+        letters = "beetles"
+
+        with self.assertRaises(ValueError):
+            _ = en_words.words_from_letters(letters, min_len=-1, max_len=5)
+
+    def test_words_from_letters_min_len_zero(self):
+        letters = "beetles"
+
+        with self.assertRaises(ValueError):
+            _ = en_words.words_from_letters(letters, min_len=0, max_len=5)
+
+    def test_words_from_letters_max_len_negative(self):
+        letters = "beetles"
+
+        with self.assertRaises(ValueError):
+            _ = en_words.words_from_letters(letters, min_len=1, max_len=-1)
+
+    def test_words_from_letters_max_len_zero(self):
+        letters = "beetles"
+
+        with self.assertRaises(ValueError):
+            _ = en_words.words_from_letters(letters, min_len=1, max_len=0)
+
+    def test_words_from_letters_min_len_bigger_than_max_len(self):
+        letters = "beetles"
+
+        with self.assertRaises(ValueError):
+            _ = en_words.words_from_letters(letters, min_len=3, max_len=1)
+
+    def test_words_from_letters(self):
+        letters = "beetles"
+        result = en_words.words_from_letters(letters, min_len=3, max_len=5)
+
+        for _ in result:
+            self.assertGreaterEqual(len(_), 3)
+            self.assertLessEqual(len(_), 5)
+
+    def test_words_from_letters_same_min_max_len(self):
+        letters = "beetles"
+        result = en_words.words_from_letters(letters, min_len=6, max_len=6)
+
+        for _ in result:
+            self.assertEqual(len(_), 6)
+            self.assertEqual(len(_), 6)
+
+    def test_words_from_letters_remove_duplicates(self):
+        letters = "beetles"
+        letters_set = "".join(set(letters))
+        result = en_words.words_from_letters(letters, min_len=3, max_len=5, remove_doubles=True)
+
+        for _ in result:
+            self.assertEqual(len(_), len(set(_)))  # no duplicate letters
+            self.assertTrue(set(_).issubset(letters_set)) # only allowed letters
 
 
 class TestAnagrams(unittest.TestCase):
