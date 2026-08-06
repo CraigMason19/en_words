@@ -13,8 +13,22 @@ English Letter Frequency:
 import string
 import random
 
+
+# Globals
+
 ALPHABET_LOWER = string.ascii_lowercase
 ALPHABET_UPPER = string.ascii_uppercase
+
+VOWELS_LOWER = "aeiou"
+VOWELS_UPPER = "AEIOU"
+VOWELS = "AEIOUaeiou"
+
+CONSONANTS_LOWER = "bcdfghjklmnpqrstvwxyz"
+CONSONANTS_UPPER = "BCDFGHJKLMNPQRSTVWXYZ"
+CONSONANTS = "BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz"
+
+#endregion
+
 
 def is_letter(letter: str) -> bool:
 		"""
