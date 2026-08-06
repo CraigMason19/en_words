@@ -311,23 +311,35 @@ def letters_in_word(letters, word, remove_doubles=False):
         
     return True
 
-def words_from_letters(letters, min_len=3, max_len=6, remove_doubles=False, filename_sorted=_FILENAME_SORTED):
-    """ Finds a list of words that contains certain letters.
+def words_from_letters(letters: str, 
+        min_len: int=3,
+        max_len: int=6,
+        remove_doubles: bool=False,
+        filename_sorted: str=_FILENAME_SORTED) -> list[str]:
+    """ 
+    Return all words that can be formed using the supplied letters.
+
+    Unlike an anagram search, each letter may be used any number of times.
+    A word is considered valid if it contains only characters from `letters` and 
+    its length is between `min_len` and `max_len` (inclusive).
+
+    Remove doubles can be set so that only words with unique letters are returned.
 
     Args:
-        letters:
-            A string of letters that are in a word.
-        min_len:
+        letters (str):
+            A string of letters used in a word.
+        min_len (int):
             The minimum word length.
-        max_len:
+        max_len (int):
             The maximum word length.
-        remove_doubles:
-            A bool to allow for / against double letters.
-        filename_sorted:
+        remove_doubles (bool):
+            Allow for or against double letters.
+        filename_sorted (str):
             The name of the file containing the sorted dictionary.
 
     Returns:
-        A list.
+        list[str]:
+            A list containing all the matching words.
     """ 
     letters = letters.lower()    
     words = []
