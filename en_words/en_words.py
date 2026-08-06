@@ -341,19 +341,23 @@ def words_from_letters(letters: str,
         list[str]:
             A list containing all the matching words.
     """ 
+    if min_len <= 0:
+        raise ValueError(f"min_len cannot be less than 1: {min_len}")
+
+    if max_len <= 0:
+        raise ValueError(f"max_len cannot be less than 1: {max_len}")
+
+    if min_len > max_len:
+        raise ValueError(f"max_len cannot be bigger than min_len: {max_len} > {min_len}")
+
+
     letters = letters.lower()    
     words = []
-
-    if min_len == None or min_len == 0:
-        min_len = 1
 
     for word in sorted_words_gen(filename_sorted):
         if len(word) < min_len:
             continue
 
-        # If there is no max_len just carry on, otherwise stop
-        if max_len == None:
-            pass
         else:
             if len(word) > max_len:
                 break
