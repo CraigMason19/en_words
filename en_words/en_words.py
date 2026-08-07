@@ -18,6 +18,8 @@
 
 import os
 
+from en_words.letters import VOWELS, CONSONANTS
+
 # region Globals
 
 _PATH = os.path.dirname(__file__)
@@ -367,6 +369,34 @@ def words_from_letters(letters: str,
             words.append(word.lower())
 
     return(words)
+
+def vowel_count(word: str) -> int:
+    """
+    Counts the number of vowels in a string.
+
+    Args:
+        word (str):
+            The input string to count.
+    
+    Returns:
+        int:
+            The number of vowels in a string.
+    """
+    return sum(letter in VOWELS for letter in word)
+
+def consonant_count(word: str) -> int:
+    """
+    Counts the number of consonants in a string.
+
+    Args:
+        word (str):
+            The input string to count.
+    
+    Returns:
+        int:
+            The number of consonants in a string.
+    """
+    return sum(letter in CONSONANTS for letter in word)
 
 def anagrams(word: str, filename_sorted: str = _FILENAME_SORTED) -> list[str]:
     """ 
