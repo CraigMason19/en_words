@@ -178,6 +178,46 @@ class TestWordsFromLetters(unittest.TestCase):
             self.assertTrue(set(_).issubset(letters_set)) # only allowed letters
 
 
+class TestVowelCount(unittest.TestCase):
+    def test_vowel_count_empty(self):
+        result = en_words.vowel_count("")
+        expected = 0
+
+        self.assertEqual(result, expected)
+
+    def test_vowel_count(self):
+        result = en_words.vowel_count("craig")
+        expected = 2
+
+        self.assertEqual(result, expected)
+
+    def test_vowel_count_mixed_case(self):
+        result = en_words.vowel_count("Hello World")
+        expected = 3
+
+        self.assertEqual(result, expected)
+
+
+class TestConsonantCount(unittest.TestCase):
+    def test_consonant_count_empty(self):
+        result = en_words.consonant_count("")
+        expected = 0
+
+        self.assertEqual(result, expected)
+
+    def test_consonant_count(self):
+        result = en_words.consonant_count("craig")
+        expected = 3
+
+        self.assertEqual(result, expected)
+
+    def test_consonant_count_mixed_case(self):
+        result = en_words.consonant_count("Hello World")
+        expected = 7
+
+        self.assertEqual(result, expected)
+
+
 class TestAnagrams(unittest.TestCase):
     def test_anagrams_returns_list(self):
         result = en_words.anagrams("opts")
