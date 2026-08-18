@@ -1,6 +1,7 @@
 from . import en_words
 from . import letters
 from . import NATO
+from . import utils
 from . import word_games
 
 # from en_words.en_words import (
