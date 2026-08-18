@@ -1,6 +1,10 @@
-from collections import Counter
+import random
 
-from en_words.en_words import words_from_letters, potential_words
+from collections import Counter
+from typing import Counter, Self
+
+from en_words.en_words import words_from_letters, potential_words, vowel_count
+from en_words.utils import is_sublist
 
 def spelling_bee(inner_letter, outer_letters):
     ''' https://spellingbeegame.org '''
@@ -17,12 +21,14 @@ def spelling_bee(inner_letter, outer_letters):
     print(f"\t{sb}")
     print("")
 
+
 def wordle(word, ignore, include):
     ''' https://www.nytimes.com/games/wordle/index.html '''
     words = potential_words(word, ignore, include)
     print(f'Wordle: {word}, count: {len(words)}')
     print(f"\t{words}")
     print()
+
 
 def polygon(inner_letter, outer_letters):
     ''' Game from The Times newspaper'''
@@ -38,6 +44,7 @@ def polygon(inner_letter, outer_letters):
     print(f'Polygon: ({inner_letter.lower()}, {outer_letters.lower()})')
     print(f"\t{p}")
     print("")
+
 
 def cash_square(word_list):
     ''' From take a break magazine '''
@@ -89,29 +96,232 @@ def cash_square(word_list):
                         print(f'{answer.pop()}')
     
     print("")
-    
-def countdown(letters):
-    ''' At least 3 vowels and 4 constenats hence there are only three valid 
-        choices in modern Countdown.
+
+
+#region Countdown
+
+class Countdown:
+    ''' 
+    A solver for the UK TV show Countdown.
         
-        3 vowels, 6 consonants
-        4 vowels, 5 consonants
-        5 vowels, 4 consonants.
+    Countdown uses nine letters. The selection must contain at least three vowels
+    and at least four consonants, so the only valid combinations are:
+        - 3 vowels, 6 consonants
+        - 4 vowels, 5 consonants
+        - 5 vowels, 4 consonants
+
+    Vowels and consonants are drawn from a pool to maintain distribution.
+
+    Valid words must be 3 letters or more.
+    
+    Attributes:
+        VOWEL_POOL (list[str]):
+            A class attribute of all available vowels.
+        CONSONANT_POOL (list[str]):
+            A class attribute of all available consonants.
+        MIN_WORD_LEN (int):
+            The minimum allowed word length. Default is 3
+        MIN_VOWEL_COUNT (int):
+            The minimum allowed number of vowels. Default is 3
+        MAX_VOWEL_COUNT (int):
+            The maximum allowed number of consonants. Default is 5
+
+    Methods:
+        __init__(self, letters: str):
+            Constructs a Countdown object from a string of letters.
+
+        is_valid_selection(letters: str) -> bool:
+            A static method that checks if the letters given are a valid selection 
+            in Countdown.
+
+        from_vowel_count(cls, vowel_count: int) -> Self:
+            A class method that creates a new Countdown object from a vowel count.
+    
+        solve(self) -> None:
+            Finds all words that can be formed from the selected letters, groups 
+            them by word count and then prints to the terminal.
+
+        __repr__(self) -> str:
+            Returns a string representing the Countdown letters game. 
     '''
 
-    d = { i:[] for i in range(3, 9+1) }
+    VOWEL_POOL: list[str] = (
+        ["A"] * 15
+        + ["E"] * 13
+        + ["I"] * 9
+        + ["O"] * 8
+        + ["U"] * 5
+    )
 
-    letters_counter = Counter(letters.lower())
-    words = words_from_letters(letters, 3, 9, False)
+    CONSONANT_POOL: list[str] = (
+        ["B"] * 4
+        + ["C"] * 5
+        + ["D"] * 6
+        + ["F"] * 8
+        + ["G"] * 3
+        + ["H"] * 5
+        + ["J"] * 2
+        + ["K"]
+        + ["L"] * 5
+        + ["M"] * 4
+        + ["N"] * 8
+        + ["P"] * 4
+        + ["Q"]
+        + ["R"] * 9
+        + ["S"] * 9
+        + ["T"] * 9
+        + ["V"] * 2
+        + ["W"] * 3
+        + ["X"]
+        + ["Y"] * 3
+        + ["Z"] * 2
+    )
 
-    for word in words:
-        if Counter(word) <= letters_counter:
-            d[len(word)].append(word)
+    MIN_WORD_LEN = 3
+    MIN_VOWEL_COUNT = 3
+    MAX_VOWEL_COUNT = 5
 
-    print(f"Countdown: {letters}")
-    for k, v in d.items():
-        print(f"{k} letters:")
-        print(f"\t{v}")
-        print("")
+    def __init__(self, letters: str):
+        """
+        Constructs a Countdown object from a string of letters.
 
-    print("")  
+        Args:
+            letters (str):
+                A valid string representing a countdown game. Any case.
+
+        Raises:
+            ValueError:
+                If the string is not a valid game of countdown.
+        """
+        if not self.is_valid_selection(letters):
+            raise ValueError(
+                "Invalid Countdown letter selection. " \
+                f"Must be 9 letters long, contain between {Countdown.MIN_VOWEL_COUNT} & {Countdown.MAX_VOWEL_COUNT} vowels (inclusive) with the rest as consonants. " \
+                "Must be pulled from the valid countdown distribution")
+
+        self.letters = letters.upper()
+
+    @staticmethod
+    def is_valid_selection(letters: str) -> bool:
+        """
+        Checks if the letters given are a valid selection in Countdown.
+
+        A selection is valid if the following criteria is met.
+            - Must be 9 letters
+            - Must have between 3 & 5 vowels (inclusive)
+            - Must be of a valid distribution, matching the `VOWEL_POOL` + 
+              `CONSONANT_POOL` distribution.
+            - Case is ignored
+ 
+        Args:
+            letters (str):
+                The letters selection.
+
+        Returns:
+            bool:
+                True if the the selection is valid.
+        """
+        if not letters.isalpha():
+            return False
+
+        if len(letters) != 9:
+            return False
+
+        if not Countdown.MIN_VOWEL_COUNT <= vowel_count(letters) <= Countdown.MAX_VOWEL_COUNT:
+            return False
+        
+        if not is_sublist(list(letters.upper()), Countdown.VOWEL_POOL + Countdown.CONSONANT_POOL):
+            return False
+                
+        return True    
+
+    @classmethod
+    def from_vowel_count(cls, vowel_count: int) -> Self:
+        """
+        Creates a new Countdown object from how many vowels you want to select.
+
+        Letters are chosen randomly and are then jumbled up to reflect a real game.
+
+        Args:
+            vowel_count (int):
+                A integer between `MIN_VOWEL_COUNT` & `Countdown.MAX_VOWEL_COUNT` inclusive.
+
+        Raises:
+            ValueError:
+                If the `vowel_count` is invalid
+
+        Returns:
+            Self:
+                A new Countdown object.
+        """
+        if not Countdown.MIN_VOWEL_COUNT <= vowel_count <= Countdown.MAX_VOWEL_COUNT:
+            raise ValueError(f"'vowel_count' must be between {Countdown.MIN_VOWEL_COUNT} & {Countdown.MAX_VOWEL_COUNT} (inclusive): {vowel_count}")
+
+        letters = []
+        consonant_count = 9 - vowel_count
+
+        for _ in range(vowel_count):
+            pool = Countdown.VOWEL_POOL.copy()
+            letter = pool.pop(random.randrange(len(pool)))
+            letters.append(letter)
+
+        for _ in range(consonant_count):
+            pool = Countdown.CONSONANT_POOL.copy()
+            letter = pool.pop(random.randrange(len(pool)))
+            letters.append(letter)
+
+        random.shuffle(letters)
+
+        return Countdown("".join(letters))
+
+    def solve(self) -> None:
+        """
+        Finds all words that can be formed from the selected letters and groups
+        them by word length. The results are stored in a dictionary of the form:
+
+            {word_length: [word, word, ...]}
+
+        where the key is the length of the word and the value is a list of words
+        of that length.
+
+        The results are then printed to the terminal in increasing order of word
+        length.
+
+        Example:
+            >>> Countdown('HDGRAEION').solve()
+
+            Countdown: HDGRAEION
+                3 letters (122):
+                    ['ado', 'age', ...]
+        """
+        d = { i:[] for i in range(3, 9+1) }
+
+        letters_counter = Counter(self.letters.lower())
+        words = words_from_letters(self.letters, self.MIN_WORD_LEN, 9, False)
+
+        for word in words:
+            if Counter(word) <= letters_counter:
+                d[len(word)].append(word)
+
+        print(f"Countdown: {self.letters}")
+        for k, v in d.items():
+            print(f"{k} letters ({len(v)}):")
+            print(f"\t{v}")
+            print("")
+            
+        print("")  
+
+    def __repr__(self) -> str:
+        """ 
+        Returns a string representing the Countdown letters game. 
+
+        Example:
+            >>> repr(Countdown("hdgraeion"))
+            Countdown("HDGRAEION")
+
+        Returns:
+            str:
+        """
+        return f'Countdown("{self.letters}")'
+
+#endregion
