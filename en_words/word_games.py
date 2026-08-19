@@ -328,7 +328,7 @@ class Countdown:
         length.
 
         Example:
-            >>> Countdown('HDGRAEION').solve()
+            >>> Countdown('HDGRAEION').solve_and_display()
 
             Countdown: HDGRAEION
                 3 letters (122):
