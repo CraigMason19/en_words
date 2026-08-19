@@ -114,11 +114,11 @@ class Countdown:
 
     Valid words must be 3 letters or more.
     
-    Attributes:
+    Class Attributes:
         VOWEL_POOL (list[str]):
-            A class attribute of all available vowels.
+            A class attribute of all available vowels
         CONSONANT_POOL (list[str]):
-            A class attribute of all available consonants.
+            A class attribute of all available consonants
         MIN_WORD_LEN (int):
             The minimum allowed word length. Default is 3
         MIN_VOWEL_COUNT (int):
@@ -126,6 +126,14 @@ class Countdown:
         MAX_VOWEL_COUNT (int):
             The maximum allowed number of consonants. Default is 5
 
+    Instance Attributes:
+        letters (str):
+            A string of the numbers passed in when constructed
+        vowels (str):
+            The vowels in the letters, sorted alphabetically
+        consonants (str):
+            The consonants in the letters, sorted alphabetically
+            
     Methods:
         __init__(self, letters: str):
             Constructs a Countdown object from a string of letters.
@@ -208,6 +216,8 @@ class Countdown:
                 "Must be pulled from the valid countdown letter distribution")
 
         self.letters = letters.upper()
+        self.vowels = ''.join(sorted([_ for _ in list(self.letters) if _ in Countdown.VOWEL_POOL]))
+        self.consonants = ''.join(sorted([_ for _ in list(self.letters) if _ in Countdown.CONSONANT_POOL]))
 
     @staticmethod
     def is_valid_selection(letters: str) -> bool:

@@ -28,10 +28,27 @@ class TestCountdownCreation(unittest.TestCase):
             except Exception as e: # pragma: no cover
                 self.fail(f"Raised an exception: {e}")
 
-
     def test_invalid_construction(self):
         with self.assertRaises(ValueError):
             _ = Countdown("foo")
+
+    def test_correct_attribute_letters(self):
+        result = Countdown("hdgraeion").letters
+        expected = "HDGRAEION"
+
+        self.assertEqual(result, expected)
+
+    def test_correct_attribute_vowels(self):
+        result = Countdown("CAITDEHON").vowels
+        expected = "AEIO"
+
+        self.assertEqual(result, expected)
+
+    def test_correct_attribute_consonants(self):
+        result = Countdown("CAITDEHON").consonants
+        expected = "CDHNT"
+
+        self.assertEqual(result, expected)
 
 
 class TestCountdownIsValidSelection(unittest.TestCase):
