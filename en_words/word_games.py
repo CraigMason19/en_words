@@ -1,7 +1,7 @@
 import random
 
 from collections import Counter
-from typing import Counter, Self
+from typing import Self
 
 from en_words.en_words import words_from_letters, potential_words, vowel_count
 from en_words.utils import is_sublist
@@ -136,8 +136,12 @@ class Countdown:
 
         from_vowel_count(cls, vowel_count: int) -> Self:
             A class method that creates a new Countdown object from a vowel count.
+
+        def solve(self) -> dict[int, list[str]]:
+            Finds all words that can be formed from the selected letters, groups 
+            them by word count and returns the results as a dictionary. 
     
-        solve(self) -> None:
+        solve_and_display(self) -> None:
             Finds all words that can be formed from the selected letters, groups 
             them by word count and then prints to the terminal.
 
@@ -195,9 +199,9 @@ class Countdown:
         """
         if not self.is_valid_selection(letters):
             raise ValueError(
-                "Invalid Countdown letter selection. " \
+                f"Invalid Countdown letter selection. '{letters}' " \
                 f"Must be 9 letters long, contain between {Countdown.MIN_VOWEL_COUNT} & {Countdown.MAX_VOWEL_COUNT} vowels (inclusive) with the rest as consonants. " \
-                "Must be pulled from the valid countdown distribution")
+                "Must be pulled from the valid countdown letter distribution")
 
         self.letters = letters.upper()
 
@@ -260,21 +264,43 @@ class Countdown:
         letters = []
         consonant_count = 9 - vowel_count
 
+        vowel_pool = Countdown.VOWEL_POOL.copy()
+        consonant_pool = Countdown.CONSONANT_POOL.copy()
+
         for _ in range(vowel_count):
-            pool = Countdown.VOWEL_POOL.copy()
-            letter = pool.pop(random.randrange(len(pool)))
+            letter = vowel_pool.pop(random.randrange(len(vowel_pool)))
             letters.append(letter)
 
         for _ in range(consonant_count):
-            pool = Countdown.CONSONANT_POOL.copy()
-            letter = pool.pop(random.randrange(len(pool)))
+            letter = consonant_pool.pop(random.randrange(len(consonant_pool)))
             letters.append(letter)
 
         random.shuffle(letters)
 
         return Countdown("".join(letters))
 
-    def solve(self) -> None:
+    def solve(self) -> dict[int, list[str]]:
+        """
+        Finds all words that can be formed from the selected letters and groups
+        them by word length. The results are returned in a dictionary of the form:
+
+            {word_length: [word, word, ...]}
+
+        Returns:
+            dict[int, list[str]]:
+        """
+        d = { i:[] for i in range(3, 9+1) }
+
+        letters_counter = Counter(self.letters.lower())
+        words = words_from_letters(self.letters, self.MIN_WORD_LEN, 9, False)
+
+        for word in words:
+            if Counter(word) <= letters_counter:
+                d[len(word)].append(word)
+
+        return d
+
+    def solve_and_display(self) -> None:
         """
         Finds all words that can be formed from the selected letters and groups
         them by word length. The results are stored in a dictionary of the form:
@@ -294,16 +320,10 @@ class Countdown:
                 3 letters (122):
                     ['ado', 'age', ...]
         """
-        d = { i:[] for i in range(3, 9+1) }
-
-        letters_counter = Counter(self.letters.lower())
-        words = words_from_letters(self.letters, self.MIN_WORD_LEN, 9, False)
-
-        for word in words:
-            if Counter(word) <= letters_counter:
-                d[len(word)].append(word)
+        d = self.solve()
 
         print(f"Countdown: {self.letters}")
+
         for k, v in d.items():
             print(f"{k} letters ({len(v)}):")
             print(f"\t{v}")
