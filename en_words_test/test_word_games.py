@@ -117,6 +117,18 @@ class TestCountdownFromVowelCount(unittest.TestCase):
             self.assertEqual(Countdown.is_valid_selection(c.letters), expected)
 
 
+# class TestCountdownSolve(unittest.TestCase):
+# class TestCountdownSolveAndDisplay(unittest.TestCase):
+
+
+class TestCountdownFind9LetterGame(unittest.TestCase):
+    def test_success(self):
+        c = Countdown.find_9_letter_game()
+        expected = True
+
+        self.assertEqual(Countdown.is_valid_selection(c.letters), expected)
+
+
 class TestCountdownStringRepresentation(unittest.TestCase):
     def test_repr(self):
         result = repr(Countdown("hdgraeion"))

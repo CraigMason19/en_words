@@ -145,6 +145,10 @@ class Countdown:
             Finds all words that can be formed from the selected letters, groups 
             them by word count and then prints to the terminal.
 
+        find_9_letter_game(cls) -> Self:
+            A class method to find a Countdown game that has one or more 9 letter
+            solutions. 
+
         __repr__(self) -> str:
             Returns a string representing the Countdown letters game. 
     '''
@@ -331,6 +335,24 @@ class Countdown:
             
         print("")  
 
+    @classmethod
+    def find_9_letter_game(cls) -> Self:
+        """
+        A class method to find a Countdown game that has one or more 9 letter
+        solutions. 
+
+        Returns:
+            Self:
+                A new Countdown object.
+        """       
+        while True:
+            vowel_count = random.choice([i for i in range(Countdown.MIN_VOWEL_COUNT, Countdown.MAX_VOWEL_COUNT + 1)])
+            c = Countdown.from_vowel_count(vowel_count)
+            d = c.solve()
+
+            if len(d[9]) > 0:
+                return c
+            
     def __repr__(self) -> str:
         """ 
         Returns a string representing the Countdown letters game. 
