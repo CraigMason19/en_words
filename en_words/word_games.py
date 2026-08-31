@@ -22,10 +22,33 @@ def spelling_bee(inner_letter, outer_letters):
     print("")
 
 
-def wordle(word, ignore, include):
-    ''' https://www.nytimes.com/games/wordle/index.html '''
-    words = potential_words(word, ignore, include)
-    print(f'Wordle: {word}, count: {len(words)}')
+def wordle(partial_word: str, ignore: str, include: str) -> list[str]:
+    ''' 
+    Helps solve the viral wordle puzzle on the NY Times website.
+
+    https://www.nytimes.com/games/wordle/index.html
+
+    Returns a list of all potential viable words.
+
+    Example:
+        >>> from en_words.word_games import wordle
+        >>> wordle("?a?e?", "STMLkdBY", "n")       
+        Wordle: ?a?e?, potentials: 7
+            ['hagen', 'haven', 'navew', 'paven', 'ranee', 'raven', 'waxen']
+
+    Args:
+        partial_word (str):
+            A word with letters missing (represented by the `en_words.MISSING_CHARACTERS` global variable).
+        ignore_letters (str):
+            A string of letters that are NOT in the word.
+        required_letters (str):
+            A string of letters that are required, but their position isn't known.
+        
+    Returns:
+        list[str]:    
+    '''
+    words = potential_words(partial_word, ignore, include)
+    print(f'Wordle: {partial_word}, potentials: {len(words)}')
     print(f"\t{words}")
     print()
 
