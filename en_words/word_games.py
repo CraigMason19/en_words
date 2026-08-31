@@ -335,15 +335,14 @@ class Countdown:
                     ['ado', 'age', ...]
         """
         d = self.solve()
+        total_words = sum([len(v) for k, v in d.items()])
 
-        print(f"Countdown: {self.letters}")
+        print(f"Countdown: {self.letters} ({total_words})\n")
 
         for k, v in d.items():
             print(f"{k} letters ({len(v)}):")
             print(f"\t{v}")
             print("")
-            
-        print("")  
 
     @classmethod
     def find_9_letter_game(cls) -> Self:
