@@ -6,6 +6,10 @@ from typing import Self
 from en_words.en_words import words_from_letters, potential_words, vowel_count
 from en_words.utils import is_sublist
 
+
+WORDLE_LETTER_COUNT = 5
+
+
 def spelling_bee(inner_letter, outer_letters):
     ''' https://spellingbeegame.org '''
     def contains_central_letter(word):
@@ -22,7 +26,7 @@ def spelling_bee(inner_letter, outer_letters):
     print("")
 
 
-def wordle(partial_word: str, ignore: str, include: str) -> list[str]:
+def wordle(partial: str, ignore: str = "", include: str= "") -> list[str]:
     ''' 
     Helps solve the viral Wordle puzzle on the NY Times website.
 
@@ -37,20 +41,32 @@ def wordle(partial_word: str, ignore: str, include: str) -> list[str]:
             ['hagen', 'haven', 'navew', 'paven', 'ranee', 'raven', 'waxen']
 
     Args:
-        partial_word (str):
+        partial (str):
             A string made up from letters in the correct place (green) with missing 
             letters (represented by the `en_words.MISSING_CHARACTERS` global variable).
             '?' for example.
-        ignore_letters (str):
+        ignore (str):
             A string of letters that are NOT in the word.
-        required_letters (str):
+        include (str):
             A string of letters that are required, but their position isn't known.
         
     Returns:
         list[str]:    
-    '''   
-    words = potential_words(partial_word, ignore, include)
-    print(f'Wordle: {partial_word}, potentials: {len(words)}')
+    '''
+    if len(partial) != WORDLE_LETTER_COUNT:
+        raise ValueError(f"Wordle uses words {WORDLE_LETTER_COUNT} letters long")
+
+
+    for letter in ignore:
+        if letter.upper() in partial.upper():
+            raise ValueError(f"A letter in the ignore string is in the partial word: '{letter}'")
+        
+        if letter.upper() in include.upper():
+            raise ValueError(f"A letter in the ignore string is in the include string: '{letter}'")
+
+       
+    words = potential_words(partial, ignore, include)
+    print(f'Wordle: {partial}, potentials: {len(words)}')
     print(f"\t{words}")
     print()
 
