@@ -24,7 +24,7 @@ def spelling_bee(inner_letter, outer_letters):
 
 def wordle(partial_word: str, ignore: str, include: str) -> list[str]:
     ''' 
-    Helps solve the viral wordle puzzle on the NY Times website.
+    Helps solve the viral Wordle puzzle on the NY Times website.
 
     https://www.nytimes.com/games/wordle/index.html
 
@@ -38,7 +38,9 @@ def wordle(partial_word: str, ignore: str, include: str) -> list[str]:
 
     Args:
         partial_word (str):
-            A word with letters missing (represented by the `en_words.MISSING_CHARACTERS` global variable).
+            A string made up from letters in the correct place (green) with missing 
+            letters (represented by the `en_words.MISSING_CHARACTERS` global variable).
+            '?' for example.
         ignore_letters (str):
             A string of letters that are NOT in the word.
         required_letters (str):
@@ -46,7 +48,7 @@ def wordle(partial_word: str, ignore: str, include: str) -> list[str]:
         
     Returns:
         list[str]:    
-    '''
+    '''   
     words = potential_words(partial_word, ignore, include)
     print(f'Wordle: {partial_word}, potentials: {len(words)}')
     print(f"\t{words}")
@@ -90,7 +92,7 @@ def cash_square(word_list):
     rows = [w.lower() for w in word_list]
     cols = [''.join(zipped) for zipped in zip(*rows)]
 
-    # Precompute words that might be a soultion to a column
+    # Precompute words that might be a solution to a column
     potentials_col_1 = words_from_letters(cols[0], 4, 4)
     potentials_col_2 = words_from_letters(cols[1], 4, 4)
     potentials_col_3 = words_from_letters(cols[2], 4, 4)
