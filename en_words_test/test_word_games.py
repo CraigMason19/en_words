@@ -1,6 +1,31 @@
 import unittest
 
-from en_words.word_games import Countdown
+from en_words.word_games import (
+    wordle,
+    Countdown,
+)
+
+
+#region Wordle
+
+class TestWordle(unittest.TestCase):
+    def test_too_few_letters_in_partial_raises_error(self):
+        with self.assertRaises(ValueError):
+            wordle('????')
+
+    def test_too_many_letters_in_partial_raises_error(self):
+        with self.assertRaises(ValueError):
+            wordle('??????')
+
+    def test_ignore_letter_in_partial_word_raises_error(self):
+        with self.assertRaises(ValueError):
+            wordle('????s', 's')
+
+    def test_ignore_letter_in_include_raises_error(self):
+        with self.assertRaises(ValueError):
+            wordle("?????", "s", "s")
+
+#endregion 
 
 
 #region Countdown Tests
