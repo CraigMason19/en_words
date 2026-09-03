@@ -49,7 +49,12 @@ def wordle(partial: str, ignore: str = "", include: str= "") -> list[str]:
             A string of letters that are NOT in the word.
         include (str):
             A string of letters that are required, but their position isn't known.
-        
+
+    Raises:
+        ValueError:
+            If the `partial` word is bigger than 5. Also raises if a letter in the 
+            `ignore` string is in the `partial` or `include` strings.
+            
     Returns:
         list[str]:    
     '''
