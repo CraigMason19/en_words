@@ -28,13 +28,13 @@ def presses_for_letter(letter: str) -> int:
         letter (str):
             A letter of any case.
 
-    Returns:
-        int: 
-            The number of presses needed to type the letter (1-4).
-
     Raises:
         ValueError:
             If `letter` is not a letter present in the T9 lookup.
+
+    Returns:
+        int: 
+            The number of presses needed to type the letter (1-4).
     """
     letter = letter.lower()
 
@@ -45,17 +45,23 @@ def presses_for_letter(letter: str) -> int:
 
 def letter_from_presses(number: int, count: int) -> str:
     """
-    Return the letter corresponding to a digit pressed 'count' times on a classic T9 keypad.
+    Return the letter corresponding to a digit pressed 'count' times on a 
+    classic T9 keypad.
 
     Args:
-        number (int): The digit key (2-9).
-        count (int): Number of times the key is pressed (1 to number of letters on key).
-
-    Returns:
-        str: The decoded letter.
+        number (int): 
+            The digit key (2-9).
+        count (int): 
+            Number of times the key is pressed (1 to number of 
+            letters on key).
 
     Raises:
-        ValueError: If the digit is not valid or count is out of range.
+        ValueError: 
+            If the digit is not valid or count is out of range.
+
+    Returns:
+        str: 
+            The decoded letter.        
     """
     for letters, digit in T9_LOOKUP:
         if number == digit:
