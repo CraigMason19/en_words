@@ -11,8 +11,8 @@ T9_LOOKUP = [
 
 DIGIT_MAP = {}
 for letters, num in T9_LOOKUP:
-    for ch in letters:
-        DIGIT_MAP[ch] = str(num)
+    for letter in letters:
+        DIGIT_MAP[letter] = str(num)
 
 PRESSES_MAP = {}
 for letters, _ in T9_LOOKUP:
@@ -100,7 +100,7 @@ class T9Cipher(Cipher):
             str: 
                 Encoded numeric string, with non-alphabetic characters removed
         """
-        return ''.join(DIGIT_MAP.get(ch.lower(), '') for ch in CleanInput.to_alpha(text))
+        return ''.join(DIGIT_MAP.get(letter.lower(), '') for letter in CleanInput.alpha(text))
 
     @staticmethod
     def decode(text: str) -> str:
@@ -162,12 +162,8 @@ class ReversibleT9Cipher(Cipher):
         """
         letters = []
 
-        for ch in CleanInput.to_alpha(text):
-            if(ch in DIGIT_MAP):
-                letters.append(DIGIT_MAP[ch] * PRESSES_MAP[ch])
-                continue
-
-            letters.append(ch)
+        for letter in CleanInput.alpha(text):
+            letters.append(DIGIT_MAP[letter] * PRESSES_MAP[letter])
             
         return T9_ENCODING_DELIMITER.join(letters)
 
