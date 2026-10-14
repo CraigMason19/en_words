@@ -170,7 +170,7 @@ class PolybiusCheckerboard(Cipher):
             str: 
                 A string of 2-digit numbers separated by spaces.
         """
-        clean = CleanInput.to_alpha(message).upper()
+        clean = CleanInput.alpha(message).upper()
         clean = clean.replace('J', 'I') # interchangeable
 
         return ' '.join([PolybiusCheckerboard.cell_coords(c) for c in clean])

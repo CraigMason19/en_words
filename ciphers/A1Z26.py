@@ -35,7 +35,7 @@ REVERSE_A1Z26_LOOKUP = {v: k for k, v in A1Z26_LOOKUP.items()}
 class A1Z26(Cipher):
     @staticmethod
     def encode(text: str) -> str:
-        tokens = CleanInput.to_alpha(text, with_spaces=True).split()
+        tokens = CleanInput.alpha(text, with_spaces=True).split()
         clean_str = ' '.join(tokens).upper()
 
         return ' '.join(A1Z26_LOOKUP[ch] for ch in clean_str)
