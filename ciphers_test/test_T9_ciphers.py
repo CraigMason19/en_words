@@ -1,6 +1,37 @@
 import unittest
 
-from ciphers.T9 import T9Cipher, ReversibleT9Cipher
+from ciphers.T9 import (
+    presses_for_letter,
+    T9Cipher, 
+    ReversibleT9Cipher,
+)
+
+
+class PressesForLetter(unittest.TestCase):
+    def test_1_press(self):
+        result = presses_for_letter('p')
+        expected = 1
+
+        self.assertEqual(result, expected)
+
+    def test_4_press(self):
+        result = presses_for_letter('z')
+        expected = 4
+
+        self.assertEqual(result, expected)
+
+    def test_empty_letter_raises_value_error(self):
+        with self.assertRaises(ValueError):
+            presses_for_letter('')
+
+    def test_multiple_letters_raises_value_error(self):
+        with self.assertRaises(ValueError):
+            presses_for_letter('pq')
+
+    def test_word_raises_value_error(self):
+        with self.assertRaises(ValueError):
+            presses_for_letter('pq')
+
 
 class TestT9Cipher(unittest.TestCase):
     def test_name_attribute(self):
