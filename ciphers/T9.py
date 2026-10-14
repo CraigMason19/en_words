@@ -19,27 +19,29 @@ for letters, _ in T9_LOOKUP:
     for i, letter in enumerate(letters, start=1):
         PRESSES_MAP[letter] = i
 
-def presses_for_letter(ch: str) -> int:
+def presses_for_letter(letter: str) -> int:
     """
     Return the number of key presses required for a given letter on a classic 
     T9 phone keypad.
 
     Args:
-        ch (str): A letter (any case).
+        letter (str):
+            A letter of any case.
 
     Returns:
-        int: The number of presses needed to type the letter (1-4).
+        int: 
+            The number of presses needed to type the letter (1-4).
 
     Raises:
-        ValueError
-            If `ch` is not a letter present in the T9 lookup.
+        ValueError:
+            If `letter` is not a letter present in the T9 lookup.
     """
-    ch = ch.lower()
+    letter = letter.lower()
 
     try:
-        return PRESSES_MAP[ch]
+        return PRESSES_MAP[letter]
     except KeyError:          
-        raise ValueError(f"Parameter passed was not a letter in the T9 lookup: {ch}")
+        raise ValueError(f"Parameter passed was not a letter in the T9 lookup: {letter}")
 
 def letter_from_presses(number: int, count: int) -> str:
     """
