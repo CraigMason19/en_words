@@ -93,10 +93,12 @@ class T9Cipher(Cipher):
             '27244'
         
         Args:
-            text (str): Input text to encode.
+            text (str): 
+                Input text to encode.
 
         Returns:
-            str: Encoded numeric string, with non-alphabetic characters removed
+            str: 
+                Encoded numeric string, with non-alphabetic characters removed
         """
         return ''.join(DIGIT_MAP.get(ch.lower(), '') for ch in CleanInput.to_alpha(text))
 
@@ -151,7 +153,8 @@ class ReversibleT9Cipher(Cipher):
             "44-33-555-555-666"
         
         Args:
-            text (str): Input text to encode.
+            text (str): 
+                Input text to encode.
 
         Returns:
             str: Encoded numeric string joined by `ENCODING_DELIMITER`, removes 
@@ -183,7 +186,8 @@ class ReversibleT9Cipher(Cipher):
             "hello"
         
         Args:
-            encoded_text (str): ReversibleT9Cipher encoded string.
+            encoded_text (str): 
+                ReversibleT9Cipher encoded string.
 
         Raises:
             ValueError: If the encoded string does not contain any digits or the
