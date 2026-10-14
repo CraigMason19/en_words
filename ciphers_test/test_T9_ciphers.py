@@ -2,6 +2,7 @@ import unittest
 
 from ciphers.T9 import (
     presses_for_letter,
+    letter_from_presses,
     T9Cipher, 
     ReversibleT9Cipher,
 )
@@ -14,7 +15,7 @@ class PressesForLetter(unittest.TestCase):
 
         self.assertEqual(result, expected)
 
-    def test_4_press(self):
+    def test_4_presses(self):
         result = presses_for_letter('z')
         expected = 4
 
@@ -31,6 +32,54 @@ class PressesForLetter(unittest.TestCase):
     def test_word_raises_value_error(self):
         with self.assertRaises(ValueError):
             presses_for_letter('pq')
+
+
+class LetterFromPresses(unittest.TestCase):
+    def test_number_out_of_min_range_raises_value_error(self):
+        with self.assertRaises(ValueError):
+            letter_from_presses(1, 1)
+
+    def test_number_out_of_max_range_raises_value_error(self):
+        with self.assertRaises(ValueError):
+            letter_from_presses(10, 1)
+
+    def test_number_2_presses_0_raises_value_error(self):
+        with self.assertRaises(ValueError):
+            letter_from_presses(2, 0)
+
+    # Digit 2
+    def test_number_2_presses_1(self):
+        result = letter_from_presses(2, 1)
+        expected = "a"
+
+        self.assertEqual(result, expected)
+
+    def test_number_2_presses_3(self):
+        result = letter_from_presses(2, 3)
+        expected = "c"
+
+        self.assertEqual(result, expected)
+
+    def test_number_2_presses_4(self):
+        with self.assertRaises(ValueError):
+            letter_from_presses(2, 4)
+
+    # Digit 9
+    def test_number_9_presses_1(self):
+        result = letter_from_presses(9, 1)
+        expected = "w"
+
+        self.assertEqual(result, expected)
+
+    def test_number_9_presses_4(self):
+        result = letter_from_presses(9, 4)
+        expected = "z"
+
+        self.assertEqual(result, expected)
+
+    def test_number_9_presses_5(self):
+        with self.assertRaises(ValueError):
+            letter_from_presses(9, 5)
 
 
 class TestT9Cipher(unittest.TestCase):
