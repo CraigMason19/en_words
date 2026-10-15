@@ -4,7 +4,7 @@ from typing import Any
 
 def is_sublist(a: list[Any]=None, b: list[Any]=None) -> bool:
     """
-    Return True if `a`` can be formed from `b`, including duplicates.
+    Return True if `a` can be formed from `b`, including duplicates.
 
     Both lists default to None but must be given, otherwise a ValueError is 
     raised.
