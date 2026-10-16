@@ -50,7 +50,13 @@ class TestWords(unittest.TestCase):
         result = len(en_words.potential_words(word))
         expected = 38
         self.assertEqual(result, expected)
- 
+
+    def test_is_potential_match_required_letter_not_in_potential_word(self):
+        result = en_words.is_potential_match("??ttl-", "battle", 'x', 'y')
+        expected = False
+
+        self.assertEqual(result, expected)
+
     def test_is_potential_match_01(self):
         result = en_words.is_potential_match("??ttl-", "battle", 'x', 'b')
         expected = True
