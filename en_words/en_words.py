@@ -36,21 +36,34 @@ def create_sorted_dict(filename: str=_FILENAME, filename_sorted: str=_FILENAME_S
     Reads a dictionary in alphabetical order and then creates a file that is 
     sorted by length and then alphabetically.
 
+    The sorted dictionary will be created in the same location as the unsorted 
+    dictionary.
+
     Args:
         filename (str):
             The name of the file containing the dictionary.
         filename_sorted (str):
             The name of the file to create containing the sorted dictionary.
+                
+    Raises:
+        ValueError:
+            if `filename_sorted` is empty.
     """
+    if filename_sorted == "":
+        raise ValueError("`filename_sorted` cannot be empty")
+
     lines = None
 
     with open(filename) as f:
-        lines = f.readlines()
-        lines.sort(key=lambda item: (len(item), item)) # length then alphabetical
-    
-    with open(filename_sorted, 'w+') as f:
-        for line in lines:
-            f.write(line.lower())
+        lines = f.read().lower().splitlines()
+
+        # Sort lines by length, then alphabetically
+        lines.sort(key=lambda item: (len(item), item)) 
+
+    sorted_dictionary_filename = os.path.dirname(filename) + f"//{filename_sorted}"
+    with open(sorted_dictionary_filename, 'w+') as f:
+        # for line in lines:
+        f.write('\n'.join(lines))
 
 def unsorted_words(filename: str=_FILENAME) -> list[str]:
     """ 
