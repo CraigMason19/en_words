@@ -1,24 +1,19 @@
-#-------------------------------------------------------------------------------
-# Name:        en_words.py
-#
-# Notes:       A collection of methods for reading and interacting with a text 
-#              file containing words in a dictionary. Also contains methods for
-#              working with words. 
-#
-#              Makes use of a sorted dictionary (sorted by length as well as 
-#              alphabetically) for faster lookups, a helper function
-#              called create_sorted_dict will create one from a normal 
-#              alphabetized dictionary.
-#
-# Links:        
-#
-# TODO:        
-#
-#-------------------------------------------------------------------------------
+"""
+en_words.py
+-----------
+
+A collection of methods for reading and interacting with a text file containing
+words in a dictionary. Also contains methods for working with words. 
+
+Makes use of a sorted dictionary (sorted by length as well as alphabetically) for
+faster lookups, a helper function called create_sorted_dict will create one from 
+a normal alphabetized dictionary.
+"""
 
 import os
 
 from en_words.letters import VOWELS, CONSONANTS
+
 
 # region Globals
 
@@ -33,20 +28,19 @@ MISSING_CHARACTERS = '?-_.'
 
 #endregion
 
+
 #region Dictionary Functions
 
-def create_sorted_dict(filename=_FILENAME, filename_sorted=_FILENAME_SORTED):
-    """ Reads a dictionary in alphabetical order and then creates a file that is 
-        sorted by length and then alphabetically.
+def create_sorted_dict(filename: str=_FILENAME, filename_sorted: str=_FILENAME_SORTED) -> None:
+    """ 
+    Reads a dictionary in alphabetical order and then creates a file that is 
+    sorted by length and then alphabetically.
 
     Args:
-        filename:
+        filename (str):
             The name of the file containing the dictionary.
-        filename_sorted:
+        filename_sorted (str):
             The name of the file to create containing the sorted dictionary.
-
-    Returns:
-        None.
     """
     lines = None
 
@@ -122,15 +116,16 @@ def sorted_words_gen(filename_sorted: str=_FILENAME_SORTED):
         for line in f:
             yield line.lower().strip()
 
-def word_count(filename=_FILENAME):
-    """ Returns the number of words in the dictionary.
+def word_count(filename: str=_FILENAME) -> int:
+    """ 
+    Returns the number of words in the dictionary.
 
     Args:
-        filename:
+        filename (str):
             The name of the file containing the dictionary.
 
     Returns:
-        A int.
+        int
     """
     counter = 0
 
@@ -139,16 +134,17 @@ def word_count(filename=_FILENAME):
 
     return counter
 
-def find_largest_word(filename=_FILENAME):
-    """ Returns the largest word in the dictionary. If there is no largest word, 
-        the first word of largest length is returned.
+def find_largest_word(filename: str=_FILENAME) -> str:
+    """ 
+    Returns the largest word in the dictionary. If there is no largest word, 
+    the first word of largest length is returned.
 
     Args:
-        filename:
+        filename (str):
             The name of the file containing the dictionary.
 
     Returns:
-        A string.
+        str
     """
     max_word = ""
 
@@ -159,6 +155,7 @@ def find_largest_word(filename=_FILENAME):
     return max_word.lower()
 
 # endregion
+
 
 #region Word Finder functions 
 
@@ -216,25 +213,32 @@ def words_of_length_gen(length: int=3, filename_sorted: str=_FILENAME_SORTED):
         elif letter_count == length:
             yield word.lower()
  
-def is_potential_match(partial_word, potential_word, ignore_letters='', required_letters=''):
-    """ Compares two words to check if the words are a potential match. Returns 
-        True if they are and False otherwise.
+def is_potential_match(partial_word: str, 
+        potential_word: str, 
+        ignore_letters: str='', 
+        required_letters: str='') -> bool:
+    """ 
+    Compares two words to check if the words are a potential match. Returns True
+    if they are and False otherwise.
 
-        E.g. is_potential_match("??ttl-", "battle", 'x', 'b') == True
-             is_potential_match("??ttl-", "battle", 'xe', 'b') == False
+    Example:
+        >>> is_potential_match("??ttl-", "battle", 'x', 'b')
+        True
+        >>> is_potential_match("??ttl-", "battle", 'xe', 'b')
+        False
 
     Args:
-        partial_word:
+        partial_word (str):
             A word with letters missing (represented by MISSING_CHARACTERS global variable).
-        potential_word:
+        potential_word (str):
             A word to compare.
-        ignore_letters:
+        ignore_letters (str):
             A string of letters not needed.
-        required_letters:
+        required_letters (str):
             A string of letters that are required.
 
     Returns:
-        A bool.
+        bool
     """ 
     partial_word, potential_word = partial_word.lower(), potential_word.lower()
     ignore_letters, required_letters = ignore_letters.lower(), required_letters.lower()
@@ -260,22 +264,26 @@ def is_potential_match(partial_word, potential_word, ignore_letters='', required
 
     return True
 
-def potential_words(partial_word, ignore_letters='', required_letters='', filename_sorted=_FILENAME_SORTED):
-    """ Compares a partial word against the words inside the sorted dictionary. Returns a list
-        of all potential matches. 
+def potential_words(partial_word: str,
+        ignore_letters: str='',
+        required_letters: str='',
+        filename_sorted: str=_FILENAME_SORTED) -> list[str]:
+    """ 
+    Compares a partial word against the words inside the sorted dictionary. 
+    Returns a list of all potential matches. 
 
     Args:
-        partial_word:
+        partial_word (str):
             A word with letters missing (represented by MISSING_CHARACTERS global variable).
-        ignore_letters:
+        ignore_letters (str):
             A string of letters not needed.
-        required_letters:
+        required_letters (str):
             A string of letters that are required.
-        filename_sorted:
+        filename_sorted (str):
             The name of the file containing the sorted dictionary.
 
     Returns:
-        A list of words.
+        list[str]
     """ 
     partial_word = partial_word.lower()
     ignore_letters, required_letters = ignore_letters.lower(), required_letters.lower()
@@ -288,21 +296,21 @@ def potential_words(partial_word, ignore_letters='', required_letters='', filena
 
     return words
 
-def letters_in_word(letters, word, remove_doubles=False):
-    """ Checks that letters are in a word.
+def letters_in_word(letters: str, word: str, remove_doubles: bool=False) -> bool:
+    """ 
+    Checks that letters are in a word.
 
     Args:
-        letters:
+        letters (str):
             A string of letters that are in a word.
-        word:
+        word (str):
             The word to check.
-        remove_doubles:
+        remove_doubles (bool):
             A bool to allow for / against double letters.
 
     Returns:
-        A bool.
+        bool
     """ 
-
     # Words with unique characters
     if remove_doubles:
         if len(set(word)) != len(word):
@@ -339,6 +347,10 @@ def words_from_letters(letters: str,
             Allow for or against double letters.
         filename_sorted (str):
             The name of the file containing the sorted dictionary.
+
+    Raises:
+        ValueError:
+            If the `min_len` or `max_len` is less than 1 or if `min_len` is greater than `max_len`.
 
     Returns:
         list[str]:
@@ -380,7 +392,6 @@ def vowel_count(word: str) -> int:
     
     Returns:
         int:
-            The number of vowels in a string.
     """
     return sum(letter in VOWELS for letter in word)
 
@@ -394,11 +405,10 @@ def consonant_count(word: str) -> int:
     
     Returns:
         int:
-            The number of consonants in a string.
     """
     return sum(letter in CONSONANTS for letter in word)
 
-def anagrams(word: str, filename_sorted: str = _FILENAME_SORTED) -> list[str]:
+def anagrams(word: str, filename_sorted: str =_FILENAME_SORTED) -> list[str]:
     """ 
     Finds a list of words that are anagrams of a word.
 
@@ -415,7 +425,7 @@ def anagrams(word: str, filename_sorted: str = _FILENAME_SORTED) -> list[str]:
     return [_ for _ in anagrams_gen(word, filename_sorted)]
 
 
-def anagrams_gen(word: str, filename_sorted: str = _FILENAME_SORTED):
+def anagrams_gen(word: str, filename_sorted: str =_FILENAME_SORTED):
     """ 
     Finds a list of words that are anagrams of a word and returns a generator.
 
@@ -426,7 +436,7 @@ def anagrams_gen(word: str, filename_sorted: str = _FILENAME_SORTED):
             The name of the file containing the sorted dictionary.
 
     Returns:
-        Generator:
+        Generator
     """ 
     word = word.lower()
 
