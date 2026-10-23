@@ -20,7 +20,7 @@ Modules:
 	    Defines an implementation and tools for working with T9 and T9 reversible
         mobile phone input. 
     utils: 
-        Various tools for displaying and cleaning cipher input.
+        Various tools for displaying and cleaning ciphers.
 """
 
 from . import atbash 
