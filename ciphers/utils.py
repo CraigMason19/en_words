@@ -1,38 +1,37 @@
+"""
+utils.py
+---------------
+
+Various tools for displaying and cleaning ciphers.
+
+Globals:
+    ENCODING_DELIMITER: 
+        The default delimiter used in encoding.
+    UNKNOWN_TOKEN:
+        The default token used when decoding a token fails.
+        
+Classes:
+    CleanInput: 
+        A collection of static methods to clean / normalize strings.
+
+Functions:
+    chunk_text: 
+        Splits a string into fixed-length chunks separated by spaces.
+"""
+
 import string
 from textwrap import wrap
+
 
 ENCODING_DELIMITER: str = '/'
 UNKNOWN_TOKEN = '_'
 
 
-def chunk_text(text: str, chunk_size: int = 5) -> str:
-    """
-    Splits a string into fixed-length chunks separated by spaces. 
-    
-    Characters are preserved whereas spaces are not. The chunk_size must be 
-    positive.
-
-    Args:
-        text (str):
-            The input string to be chunked.
-        chunk_size (int):
-            The number of characters per chunk. Must be greater than 0.
-
-    Raises:
-        ValueError:
-            If the chunk_size is less than 1.
-
-    Returns:
-        str:
-            The chunked string with chunks separated by spaces.
-    """
-    if chunk_size < 1:
-        raise ValueError("chunk_size cannot be less than 1: {chunk_size}")
-
-    return ' '.join(wrap(text.replace(' ', ''), chunk_size))
-
-
 class CleanInput:
+    """
+    A collection of static methods to clean / normalize strings.
+    """
+    
     @classmethod
     def alpha(cls, text: str, with_spaces: bool = False) -> str:
         """
@@ -92,3 +91,30 @@ class CleanInput:
             charset += " "
 
         return ''.join([ch for ch in text.lower() if ch in charset])
+
+
+def chunk_text(text: str, chunk_size: int = 5) -> str:
+    """
+    Splits a string into fixed-length chunks separated by spaces. 
+    
+    Characters are preserved whereas spaces are not. The chunk_size must be 
+    positive.
+
+    Args:
+        text (str):
+            The input string to be chunked.
+        chunk_size (int):
+            The number of characters per chunk. Must be greater than 0.
+
+    Raises:
+        ValueError:
+            If the chunk_size is less than 1.
+
+    Returns:
+        str:
+            The chunked string with chunks separated by spaces.
+    """
+    if chunk_size < 1:
+        raise ValueError("chunk_size cannot be less than 1: {chunk_size}")
+
+    return ' '.join(wrap(text.replace(' ', ''), chunk_size))
