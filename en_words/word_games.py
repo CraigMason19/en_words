@@ -179,32 +179,6 @@ class Countdown:
             The vowels in the letters, sorted alphabetically
         consonants (str):
             The consonants in the letters, sorted alphabetically
-            
-    Methods:
-        __init__(self, letters: str):
-            Constructs a Countdown object from a string of letters.
-
-        is_valid_selection(letters: str) -> bool:
-            A static method that checks if the letters given are a valid selection 
-            in Countdown.
-
-        from_vowel_count(cls, vowel_count: int) -> Self:
-            A class method that creates a new Countdown object from a vowel count.
-
-        def solve(self) -> dict[int, list[str]]:
-            Finds all words that can be formed from the selected letters, groups 
-            them by word count and returns the results as a dictionary. 
-    
-        solve_and_display(self) -> None:
-            Finds all words that can be formed from the selected letters, groups 
-            them by word count and then prints to the terminal.
-
-        find_9_letter_game(cls) -> Self:
-            A class method to find a Countdown game that has one or more 9 letter
-            solutions. 
-
-        __repr__(self) -> str:
-            Returns a string representing the Countdown letters game. 
     '''
 
     VOWEL_POOL: list[str] = (
