@@ -1,3 +1,29 @@
+"""
+en_words
+-----
+
+Provides tools for working with various english language words, letters & 
+systems. Also contains various word game implementations.
+
+Resources:
+    en_words.txt:
+        A english language dictionary alphabetically sorted.
+    en_words_sorted.txt:
+        A english language dictionary sorted alphabetically, then by word length.
+
+Modules:
+    en_words: 
+	    Provides tools for working with words.
+    letters: 
+	    Provides tools for working with letters.
+    NATO: 
+	    Provides tools for working with the NATO phonetic alphabet.
+    utils: 
+	    Provides various helper utilities.
+    word_games: 
+        Implementations of various word games.
+"""
+
 from . import en_words
 from . import letters
 from . import NATO
