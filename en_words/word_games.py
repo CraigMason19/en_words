@@ -1,3 +1,20 @@
+"""
+word_games.py
+-------------
+
+Contains solvers for various word games. Spelling Bee, Wordle, Polygon, 
+Cash Square & Countdown.
+
+Globals:
+    WORDLE_LETTER_COUNT:
+        The word length for the `wordle` game.
+
+Classes:
+    Countdown:
+        A solver for the UK TV show Countdown. Also supports random game 
+        generation.
+"""
+
 import random
 
 from collections import Counter
