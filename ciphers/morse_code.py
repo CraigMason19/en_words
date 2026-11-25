@@ -26,7 +26,7 @@ import re
 from .cipher import Cipher
 from .utils import CleanInput, ENCODING_DELIMITER, UNKNOWN_TOKEN
 
-MORSE_LOOKUP = {
+MORSE_LOOKUP: dict[str, str] = {
     ' ': ENCODING_DELIMITER,
 
     'a': ".-",

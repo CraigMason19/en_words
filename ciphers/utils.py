@@ -5,9 +5,9 @@ utils.py
 Various tools for displaying and cleaning ciphers.
 
 Globals:
-    ENCODING_DELIMITER: 
+    ENCODING_DELIMITER (str): 
         The default delimiter used in encoding.
-    UNKNOWN_TOKEN:
+    UNKNOWN_TOKEN (str):
         The default token used when decoding a token fails.
         
 Classes:
@@ -24,7 +24,7 @@ from textwrap import wrap
 
 
 ENCODING_DELIMITER: str = '/'
-UNKNOWN_TOKEN = '_'
+UNKNOWN_TOKEN: str = '_'
 
 
 class CleanInput:
