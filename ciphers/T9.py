@@ -1,5 +1,7 @@
+import clean_input as ci
+
 from .cipher import Cipher
-from .utils import CleanInput
+
 
 T9_ENCODING_DELIMITER = "-"
 
@@ -100,7 +102,15 @@ class T9Cipher(Cipher):
             str: 
                 Encoded numeric string, with non-alphabetic characters removed
         """
-        return ''.join(DIGIT_MAP.get(letter.lower(), '') for letter in CleanInput.alpha(text))
+        pipeline = ci.TransformationPipeline([
+            ci.Alpha(),
+            ci.Lowercase(),
+            ci.RemoveWhitespace(),
+        ])
+
+        clean = pipeline.transform(text)
+
+        return ''.join(DIGIT_MAP.get(letter, '') for letter in clean)
 
     @staticmethod
     def decode(text: str) -> str:
@@ -160,9 +170,16 @@ class ReversibleT9Cipher(Cipher):
             str: Encoded numeric string joined by `ENCODING_DELIMITER`, removes 
                 non-alphabetic characters.
         """
+        pipeline = ci.TransformationPipeline([
+            ci.Alpha(),
+            ci.Lowercase(),
+            ci.RemoveWhitespace(),
+        ])
+
+        clean = pipeline.transform(text)
         letters = []
 
-        for letter in CleanInput.alpha(text):
+        for letter in clean:
             letters.append(DIGIT_MAP[letter] * PRESSES_MAP[letter])
             
         return T9_ENCODING_DELIMITER.join(letters)

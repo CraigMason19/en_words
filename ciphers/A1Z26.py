@@ -24,8 +24,10 @@ Example:
 
 import string
 
+import clean_input as ci
+
 from .cipher import Cipher
-from .utils import CleanInput, ENCODING_DELIMITER, UNKNOWN_TOKEN
+from .utils import ENCODING_DELIMITER, UNKNOWN_TOKEN
 
 
 A1Z26_LOOKUP = { k: str(v) for v, k in enumerate(string.ascii_uppercase, 1) } | {' ': ENCODING_DELIMITER }
@@ -35,7 +37,7 @@ REVERSE_A1Z26_LOOKUP = {v: k for k, v in A1Z26_LOOKUP.items()}
 class A1Z26(Cipher):
     @staticmethod
     def encode(text: str) -> str:
-        tokens = CleanInput.alpha(text, with_spaces=True).split()
+        tokens = ci.Alpha.transform(text).split()
         clean_str = ' '.join(tokens).upper()
 
         return ' '.join(A1Z26_LOOKUP[ch] for ch in clean_str)

@@ -2,7 +2,6 @@ import unittest
 
 from ciphers.utils import (
     chunk_text,
-    CleanInput
 )
 
 
@@ -49,46 +48,6 @@ class TestChunkText(unittest.TestCase):
         text = "Lorem ipsum dolor sit amet, consectetuer"
         result = chunk_text(text, 4)
         expected = "Lore mips umdo lors itam et,c onse ctet uer"
-
-        self.assertEqual(result, expected)
-
-
-class TestCipherUtilsCleanInputAlphabetical(unittest.TestCase):
-    def test_alphabetical(self):
-        result = CleanInput.alpha("craig_ 4!4")
-        expected = "craig"
-
-        self.assertEqual(result, expected)
-
-    def test_alphabetical_with_space_false(self):
-        result = CleanInput.alpha("Hello World", with_spaces=False)
-        expected = "helloworld"
-
-        self.assertEqual(result, expected)
-
-    def test_alphabetical_with_space_true(self):
-        result = CleanInput.alpha("Hello World", with_spaces=True)
-        expected = "hello world"
-
-        self.assertEqual(result, expected)
-
-
-class TestCipherUtilsCleanInputAlphanumeric(unittest.TestCase):
-    def test_alphanumeric(self):
-        result = CleanInput.alphanumeric("craig_ 4!4")
-        expected = "craig44"
-
-        self.assertEqual(result, expected)
-
-    def test_alphanumeric_with_space_false(self):
-        result = CleanInput.alphanumeric("Hello World 123", with_spaces=False)
-        expected = "helloworld123"
-
-        self.assertEqual(result, expected)
-
-    def test_alphanumeric_with_space_true(self):
-        result = CleanInput.alphanumeric("Hello World 123", with_spaces=True)
-        expected = "hello world 123"
 
         self.assertEqual(result, expected)
 

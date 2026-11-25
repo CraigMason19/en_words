@@ -23,8 +23,10 @@ Timing Conventions (for reference):
 
 import re
 
+import clean_input as ci
+
 from .cipher import Cipher
-from .utils import CleanInput, ENCODING_DELIMITER, UNKNOWN_TOKEN
+from .utils import ENCODING_DELIMITER, UNKNOWN_TOKEN
 
 MORSE_LOOKUP: dict[str, str] = {
     ' ': ENCODING_DELIMITER,
@@ -118,7 +120,7 @@ class MorseCode(Cipher):
             str:
                 A space-separated Morse code string.
         """
-        tokens = CleanInput.alphanumeric(text, with_spaces=True).split()
+        tokens = ci.Alphanumeric.transform(text).split()
         clean_str = ' '.join(tokens).lower()
 
         return ' '.join([MORSE_LOOKUP[ch] for ch in clean_str])

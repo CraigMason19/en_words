@@ -26,8 +26,9 @@ Example:
 
 import re
 
+import clean_input as ci
+
 from .cipher import Cipher
-from .utils import CleanInput
 
 
 class PolybiusCheckerboard(Cipher):
@@ -170,7 +171,13 @@ class PolybiusCheckerboard(Cipher):
             str: 
                 A string of 2-digit numbers separated by spaces.
         """
-        clean = CleanInput.alpha(message).upper()
+        pipeline = ci.TransformationPipeline([
+            ci.RemoveWhitespace(),
+            ci.Alpha(),
+            ci.Uppercase(),
+        ])
+
+        clean = pipeline.transform(message)
         clean = clean.replace('J', 'I') # interchangeable
 
         return ' '.join([PolybiusCheckerboard.cell_coords(c) for c in clean])
